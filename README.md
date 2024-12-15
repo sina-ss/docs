@@ -1,6 +1,6 @@
-# 📚 Sina's Learning Notes
+# 📚 Learning Notes
 
-Welcome to **Sina Sepahvand's Learning Repository**. This repository serves as a curated collection of key insights and concise notes derived from my continuous learning journey. With over 5 years of experience in frontend development and a growing interest in UI/UX design and data analysis/science, I aim to document only the most significant and non-trivial concepts encountered during my studies.
+Welcome to **Front-end Learning Repository**. This repository serves as a curated collection of key insights and concise notes derived from my continuous learning journey. With over 5 years of experience in frontend development and a growing interest in UI/UX design and data analysis/science, I aim to document only the most significant and non-trivial concepts encountered during my studies.
 
 ---
 
@@ -9,7 +9,7 @@ Welcome to **Sina Sepahvand's Learning Repository**. This repository serves as a
 - **Areas of Interest**:
   - Frontend Development
   - UI/UX Design
-  - Data Analysis & Data Science
+  - Data Analysis & Data Visualization
 
 ---
 
