@@ -1339,6 +1339,2214 @@
 <li>Consider using CSS containment for large applications.</li>
 </ul>
 </blockquote>
+<h1 id="modern-css-color-system">Modern CSS Color System</h1>
+<h2 id="understanding-color-models">Understanding Color Models</h2>
+<p>Before diving into implementation details, it's crucial to understand how different color models represent colors in digital spaces. Each system has its own advantages and use cases that influence when we should use them in modern development.</p>
+<h3 id="the-evolution-of-color-in-css">The Evolution of Color in CSS</h3>
+<p>Color representation in CSS has evolved significantly, moving from basic named colors to sophisticated color functions and spaces. Modern browsers now support a wide range of color spaces, enabling more precise and creative color manipulation.</p>
+<h2 id="color-format-deep-dive">Color Format Deep Dive</h2>
+<h3 id="hexadecimal-colors">Hexadecimal Colors</h3>
+<p>Hexadecimal notation remains widely used, but modern development has introduced new capabilities:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Traditional hex notation */</span>
+<span class="hljs-selector-class">.classic</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-number">#FF5733</span>;             <span class="hljs-comment">/* Full RGB */</span>
+    <span class="hljs-attribute">background</span>: <span class="hljs-number">#F57</span>;           <span class="hljs-comment">/* Shortened RGB */</span>
+}
+
+<span class="hljs-comment">/* Modern hex with alpha channel */</span>
+<span class="hljs-selector-class">.modern</span> {
+    <span class="hljs-attribute">color</span>: <span class="hljs-number">#FF5733FF</span>;           <span class="hljs-comment">/* RGBA (full) */</span>
+    <span class="hljs-attribute">background</span>: <span class="hljs-number">#F57F</span>;          <span class="hljs-comment">/* RGBA (shortened) */</span>
+}
+
+<span class="hljs-comment">/* Using CSS custom properties with hex */</span>
+<span class="hljs-selector-class">.dynamic</span> {
+    <span class="hljs-attr">--brand-color</span>: <span class="hljs-number">#FF5733</span>;
+    <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--brand-color);
+    <span class="hljs-comment">/* Allows for dynamic color updates */</span>
+}
+</code></pre>
+<h3 id="rgb-and-rgba-colors">RGB and RGBA Colors</h3>
+<p>RGB offers more intuitive color manipulation and supports alpha transparency:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.rgb-examples</span> {
+    <span class="hljs-comment">/* Modern RGB syntax */</span>
+    <span class="hljs-attribute">color</span>: <span class="hljs-built_in">rgb</span>(<span class="hljs-number">255</span> <span class="hljs-number">87</span> <span class="hljs-number">51</span>);           <span class="hljs-comment">/* Space-separated values */</span>
+    <span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgb</span>(<span class="hljs-number">255</span> <span class="hljs-number">87</span> <span class="hljs-number">51</span> / <span class="hljs-number">80%</span>); <span class="hljs-comment">/* Alpha channel with percentage */</span>
+    
+    <span class="hljs-comment">/* Using calc() with RGB */</span>
+    <span class="hljs-attr">--lightness</span>: <span class="hljs-number">80%</span>;
+    <span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgb</span>(
+        <span class="hljs-built_in">calc</span>(<span class="hljs-number">255</span> * <span class="hljs-built_in">var</span>(--lightness) / <span class="hljs-number">100%</span>)
+        <span class="hljs-built_in">calc</span>(<span class="hljs-number">87</span> * <span class="hljs-built_in">var</span>(--lightness) / <span class="hljs-number">100%</span>)
+        <span class="hljs-built_in">calc</span>(<span class="hljs-number">51</span> * <span class="hljs-built_in">var</span>(--lightness) / <span class="hljs-number">100%</span>)
+    );
+}
+</code></pre>
+<h3 id="hsl-colors">HSL Colors</h3>
+<p>HSL (Hue, Saturation, Lightness) provides more intuitive color manipulation:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.hsl-examples</span> {
+    <span class="hljs-comment">/* Modern HSL syntax */</span>
+    <span class="hljs-attribute">color</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">12</span> <span class="hljs-number">82%</span> <span class="hljs-number">60%</span>);          <span class="hljs-comment">/* Space-separated values */</span>
+    <span class="hljs-attribute">background</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">12</span> <span class="hljs-number">82%</span> <span class="hljs-number">60%</span> / <span class="hljs-number">80%</span>); <span class="hljs-comment">/* With alpha channel */</span>
+    
+    <span class="hljs-comment">/* Dynamic HSL manipulation */</span>
+    <span class="hljs-attr">--base-hue</span>: <span class="hljs-number">12</span>;
+    <span class="hljs-attr">--saturation</span>: <span class="hljs-number">82%</span>;
+    <span class="hljs-attr">--lightness</span>: <span class="hljs-number">60%</span>;
+    
+    <span class="hljs-attribute">color</span>: <span class="hljs-built_in">hsl</span>(
+        <span class="hljs-built_in">var</span>(--base-hue)
+        <span class="hljs-built_in">var</span>(--saturation)
+        <span class="hljs-built_in">var</span>(--lightness)
+    );
+}
+</code></pre>
+<h2 id="modern-color-implementation-strategies">Modern Color Implementation Strategies</h2>
+<h3 id="color-spaces-and-gamut">Color Spaces and Gamut</h3>
+<p>Modern CSS supports different color spaces, offering broader color ranges:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.color-spaces</span> {
+    <span class="hljs-comment">/* Display P3 color space */</span>
+    <span class="hljs-attribute">color</span>: <span class="hljs-built_in">color</span>(display-p3 <span class="hljs-number">0.8</span> <span class="hljs-number">0.2</span> <span class="hljs-number">0.1</span>);
+    
+    <span class="hljs-comment">/* Linear sRGB */</span>
+    <span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgb</span>(from srgb-linear <span class="hljs-number">0.8</span> <span class="hljs-number">0.2</span> <span class="hljs-number">0.1</span>);
+    
+    <span class="hljs-comment">/* Fallback pattern for wider gamut colors */</span>
+    <span class="hljs-attribute">background</span>: <span class="hljs-number">#ff0000</span>;  <span class="hljs-comment">/* Fallback */</span>
+    <span class="hljs-attribute">background</span>: <span class="hljs-built_in">color</span>(display-p3 <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span>);  <span class="hljs-comment">/* Wider gamut */</span>
+}
+</code></pre>
+<h3 id="color-mixing-and-manipulation">Color Mixing and Manipulation</h3>
+<p>Modern CSS provides powerful color manipulation functions:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.color-manipulation</span> {
+    <span class="hljs-comment">/* Color mixing */</span>
+    <span class="hljs-attr">--mixed-color</span>: <span class="hljs-built_in">color-mix</span>(in srgb, <span class="hljs-number">#ff0000</span> <span class="hljs-number">50%</span>, <span class="hljs-number">#00ff00</span>);
+    
+    <span class="hljs-comment">/* Relative color syntax */</span>
+    <span class="hljs-attr">--lighter-variant</span>: <span class="hljs-built_in">color-mix</span>(in srgb, <span class="hljs-built_in">var</span>(--base-color), white <span class="hljs-number">20%</span>);
+    <span class="hljs-attr">--darker-variant</span>: <span class="hljs-built_in">color-mix</span>(in srgb, <span class="hljs-built_in">var</span>(--base-color), black <span class="hljs-number">20%</span>);
+    
+    <span class="hljs-comment">/* Advanced color operations */</span>
+    <span class="hljs-attr">--adjusted-hue</span>: <span class="hljs-built_in">hsl</span>(from <span class="hljs-built_in">var</span>(--base-color) <span class="hljs-built_in">calc</span>(h + <span class="hljs-number">180</span>) s l);
+}
+</code></pre>
+<h3 id="dynamic-color-theming">Dynamic Color Theming</h3>
+<p>Implementing dynamic color themes using modern CSS:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Root level color system */</span>
+<span class="hljs-selector-pseudo">:root</span> {
+    <span class="hljs-comment">/* Base colors */</span>
+    <span class="hljs-attr">--color-primary-h</span>: <span class="hljs-number">215</span>;
+    <span class="hljs-attr">--color-primary-s</span>: <span class="hljs-number">90%</span>;
+    <span class="hljs-attr">--color-primary-l</span>: <span class="hljs-number">50%</span>;
+    
+    <span class="hljs-comment">/* Derived colors using CSS calculations */</span>
+    <span class="hljs-attr">--color-primary</span>: <span class="hljs-built_in">hsl</span>(
+        <span class="hljs-built_in">var</span>(--color-primary-h)
+        <span class="hljs-built_in">var</span>(--color-primary-s)
+        <span class="hljs-built_in">var</span>(--color-primary-l)
+    );
+    
+    <span class="hljs-comment">/* Automatic contrast colors */</span>
+    <span class="hljs-attr">--color-primary-contrast</span>: <span class="hljs-built_in">hsl</span>(
+        <span class="hljs-built_in">var</span>(--color-primary-h)
+        <span class="hljs-built_in">var</span>(--color-primary-s)
+        <span class="hljs-built_in">calc</span>(<span class="hljs-number">100%</span> - <span class="hljs-built_in">var</span>(--color-primary-l))
+    );
+}
+
+<span class="hljs-comment">/* Dark mode adjustments */</span>
+<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">prefers-color-scheme</span>: dark) {
+    <span class="hljs-selector-pseudo">:root</span> {
+        <span class="hljs-attr">--color-primary-l</span>: <span class="hljs-number">60%</span>;  <span class="hljs-comment">/* Lighter in dark mode */</span>
+    }
+}
+</code></pre>
+<h3 id="color-accessibility-and-contrast">Color Accessibility and Contrast</h3>
+<p>Modern color implementation must consider accessibility:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.accessible-colors</span> {
+    <span class="hljs-comment">/* Ensuring sufficient contrast */</span>
+    <span class="hljs-attr">--text-color</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-built_in">var</span>(--base-hue) <span class="hljs-built_in">var</span>(--base-saturation) 
+        <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--background-lightness) &lt; <span class="hljs-number">50%</span> ? <span class="hljs-number">90%</span> : <span class="hljs-number">10%</span>)
+    );
+    
+    <span class="hljs-comment">/* Dynamic contrast adjustment */</span>
+    <span class="hljs-attr">--contrast-ratio</span>: <span class="hljs-built_in">calc</span>(
+        (<span class="hljs-built_in">var</span>(--background-luminance) + <span class="hljs-number">0.05</span>) /
+        (<span class="hljs-built_in">var</span>(--text-luminance) + <span class="hljs-number">0.05</span>)
+    );
+}
+</code></pre>
+<h3 id="performance-optimization-1">Performance Optimization</h3>
+<p>Optimizing color performance in modern applications:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Color transitions */</span>
+<span class="hljs-selector-class">.optimized-colors</span> {
+    <span class="hljs-comment">/* Hardware-accelerated color transitions */</span>
+    <span class="hljs-attribute">transition</span>: background-color <span class="hljs-number">200ms</span> ease-in-out;
+    <span class="hljs-attribute">will-change</span>: background-color;
+    
+    <span class="hljs-comment">/* Using opacity for performance */</span>
+    <span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgb</span>(<span class="hljs-built_in">var</span>(--base-rgb) / <span class="hljs-built_in">var</span>(--opacity));
+}
+</code></pre>
+<h2 id="advanced-color-management">Advanced Color Management</h2>
+<h3 id="color-inheritance-and-cascading">Color Inheritance and Cascading</h3>
+<p>Understanding how colors cascade through the DOM:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.color-inheritance</span> {
+    <span class="hljs-comment">/* Contextual color adaptation */</span>
+    <span class="hljs-attribute">color</span>: inherit;
+    <span class="hljs-attribute">background-color</span>: <span class="hljs-built_in">color-mix</span>(
+        in srgb,
+        currentColor <span class="hljs-number">10%</span>,
+        transparent
+    );
+    
+    <span class="hljs-comment">/* Smart contrast adaptation */</span>
+    <span class="hljs-attr">--foreground</span>: <span class="hljs-built_in">rgb</span>(
+        from <span class="hljs-built_in">var</span>(--background)
+        <span class="hljs-built_in">calc</span>(lightness &lt; <span class="hljs-number">50%</span> ? <span class="hljs-number">255</span> : <span class="hljs-number">0</span>)
+        <span class="hljs-built_in">calc</span>(lightness &lt; <span class="hljs-number">50%</span> ? <span class="hljs-number">255</span> : <span class="hljs-number">0</span>)
+        <span class="hljs-built_in">calc</span>(lightness &lt; <span class="hljs-number">50%</span> ? <span class="hljs-number">255</span> : <span class="hljs-number">0</span>)
+    );
+}
+</code></pre>
+<h3 id="system-colors-and-preferences">System Colors and Preferences</h3>
+<p>Respecting system color preferences:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.system-aware</span> {
+    <span class="hljs-comment">/* System color tokens */</span>
+    <span class="hljs-attribute">color</span>: Canvas;
+    <span class="hljs-attribute">background-color</span>: CanvasText;
+    
+    <span class="hljs-comment">/* High contrast mode adaptation */</span>
+    <span class="hljs-keyword">@media</span> (<span class="hljs-attribute">prefers-contrast</span>: high) {
+        <span class="hljs-attr">--color-primary</span>: AccentColor;
+        <span class="hljs-attr">--color-secondary</span>: LinkText;
+    }
+}
+</code></pre>
+<h3 id="color-functions-and-calculations">Color Functions and Calculations</h3>
+<p>Advanced color manipulation techniques:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.color-calculations</span> {
+    <span class="hljs-comment">/* Advanced color mixing */</span>
+    <span class="hljs-attr">--blend-color</span>: <span class="hljs-built_in">color-mix</span>(
+        in lch,
+        <span class="hljs-built_in">var</span>(--color-a),
+        <span class="hljs-built_in">var</span>(--color-b),
+        <span class="hljs-built_in">calc</span>((<span class="hljs-number">1</span> + <span class="hljs-built_in">sin</span>(<span class="hljs-built_in">var</span>(--scroll-position))) * <span class="hljs-number">50%</span>)
+    );
+    
+    <span class="hljs-comment">/* Complementary color calculation */</span>
+    <span class="hljs-attr">--complement</span>: <span class="hljs-built_in">hsl</span>(
+        from <span class="hljs-built_in">var</span>(--base-color)
+        <span class="hljs-built_in">calc</span>(h + <span class="hljs-number">180</span>)
+        s
+        l
+    );
+}
+</code></pre>
+<h3 id="testing-and-debug-tools">Testing and Debug Tools</h3>
+<p>Tools for color testing and debugging:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Debug mode for color visualization */</span>
+<span class="hljs-selector-class">.color-debug</span> {
+    <span class="hljs-attr">--show-color-info</span>: true;
+    
+    &amp;<span class="hljs-selector-pseudo">::after</span> {
+        <span class="hljs-attribute">content</span>: <span class="hljs-built_in">attr</span>(style);
+        <span class="hljs-attribute">display</span>: <span class="hljs-built_in">var</span>(--show-color-info, none);
+        <span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgba</span>(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0.8</span>);
+        <span class="hljs-attribute">color</span>: white;
+        <span class="hljs-attribute">padding</span>: <span class="hljs-number">4px</span> <span class="hljs-number">8px</span>;
+    }
+}
+</code></pre>
+<blockquote>
+<p>💡 <strong>Best Practices Tips:</strong></p>
+<ul>
+<li>Use modern color functions and spaces for precise color manipulation.</li>
+<li>Consider accessibility when defining color schemes.</li>
+<li>Optimize color performance for large applications.</li>
+<li>Use system color tokens for consistent color handling.</li>
+<li>Leverage color functions for advanced color manipulation.</li>
+<li>Implement color debugging tools for development.</li>
+<li>Test color schemes with real users to ensure accessibility.</li>
+</ul>
+</blockquote>
+<h1 id="color-theory-and-testing-in-modern-css">Color Theory and Testing in Modern CSS</h1>
+<h2 id="understanding-color-theory">Understanding Color Theory</h2>
+<p>Color theory provides the foundation for creating effective and harmonious color schemes in web applications. Let's explore how we can apply these principles using modern CSS.</p>
+<h3 id="color-harmony-principles">Color Harmony Principles</h3>
+<p>Color harmony helps create visually pleasing designs. Here's how to implement common harmony patterns:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Complementary Colors */</span>
+<span class="hljs-selector-pseudo">:root</span> {
+    <span class="hljs-attr">--base-hue</span>: <span class="hljs-number">210</span>;  <span class="hljs-comment">/* Blue */</span>
+    <span class="hljs-attr">--complement-hue</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--base-hue) + <span class="hljs-number">180</span>);  <span class="hljs-comment">/* Orange */</span>
+    
+    <span class="hljs-attr">--primary-color</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-built_in">var</span>(--base-hue) <span class="hljs-number">75%</span> <span class="hljs-number">50%</span>);
+    <span class="hljs-attr">--complement-color</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-built_in">var</span>(--complement-hue) <span class="hljs-number">75%</span> <span class="hljs-number">50%</span>);
+}
+
+<span class="hljs-comment">/* Split Complementary */</span>
+<span class="hljs-selector-pseudo">:root</span> {
+    <span class="hljs-attr">--split-complement-1</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--base-hue) + <span class="hljs-number">150</span>);
+    <span class="hljs-attr">--split-complement-2</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--base-hue) + <span class="hljs-number">210</span>);
+    
+    <span class="hljs-attr">--split-1</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-built_in">var</span>(--split-complement-<span class="hljs-number">1</span>) <span class="hljs-number">75%</span> <span class="hljs-number">50%</span>);
+    <span class="hljs-attr">--split-2</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-built_in">var</span>(--split-complement-<span class="hljs-number">2</span>) <span class="hljs-number">75%</span> <span class="hljs-number">50%</span>);
+}
+
+<span class="hljs-comment">/* Triadic Harmony */</span>
+<span class="hljs-selector-class">.triadic-system</span> {
+    <span class="hljs-attr">--triad-1</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--base-hue) + <span class="hljs-number">120</span>);
+    <span class="hljs-attr">--triad-2</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--base-hue) + <span class="hljs-number">240</span>);
+    
+    <span class="hljs-attribute">background</span>: <span class="hljs-built_in">linear-gradient</span>(
+        triangle,
+        <span class="hljs-built_in">hsl</span>(<span class="hljs-built_in">var</span>(--base-hue) <span class="hljs-number">75%</span> <span class="hljs-number">50%</span>),
+        <span class="hljs-built_in">hsl</span>(<span class="hljs-built_in">var</span>(--triad-<span class="hljs-number">1</span>) <span class="hljs-number">75%</span> <span class="hljs-number">50%</span>),
+        <span class="hljs-built_in">hsl</span>(<span class="hljs-built_in">var</span>(--triad-<span class="hljs-number">2</span>) <span class="hljs-number">75%</span> <span class="hljs-number">50%</span>)
+    );
+}
+</code></pre>
+<h3 id="color-psychology-implementation">Color Psychology Implementation</h3>
+<p>Understanding color psychology helps create appropriate emotional responses:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Emotional Color Associations */</span>
+<span class="hljs-selector-class">.color-psychology</span> {
+    <span class="hljs-comment">/* Trust and Security */</span>
+    <span class="hljs-attr">--corporate-blue</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">210</span> <span class="hljs-number">75%</span> <span class="hljs-number">50%</span>);
+    
+    <span class="hljs-comment">/* Energy and Urgency */</span>
+    <span class="hljs-attr">--cta-orange</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">30</span> <span class="hljs-number">100%</span> <span class="hljs-number">50%</span>);
+    
+    <span class="hljs-comment">/* Growth and Nature */</span>
+    <span class="hljs-attr">--eco-green</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">120</span> <span class="hljs-number">60%</span> <span class="hljs-number">40%</span>);
+    
+    <span class="hljs-comment">/* Dynamic Color Application */</span>
+    &amp;<span class="hljs-selector-class">.financial-section</span> {
+        <span class="hljs-attribute">background</span>: <span class="hljs-built_in">var</span>(--corporate-blue);
+        <span class="hljs-comment">/* Creates sense of trust */</span>
+    }
+    
+    &amp;<span class="hljs-selector-class">.action-required</span> {
+        <span class="hljs-attribute">background</span>: <span class="hljs-built_in">var</span>(--cta-orange);
+        <span class="hljs-comment">/* Promotes immediate action */</span>
+    }
+}
+</code></pre>
+<h3 id="color-temperature-management">Color Temperature Management</h3>
+<p>Managing color temperature for visual hierarchy:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Temperature-based Design System */</span>
+<span class="hljs-selector-pseudo">:root</span> {
+    <span class="hljs-comment">/* Warm Colors */</span>
+    <span class="hljs-attr">--warm-palette</span>: {
+        <span class="hljs-attr">--primary</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">30</span> <span class="hljs-number">80%</span> <span class="hljs-number">50%</span>);
+        <span class="hljs-attr">--secondary</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">45</span> <span class="hljs-number">75%</span> <span class="hljs-number">50%</span>);
+        <span class="hljs-attr">--accent</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">15</span> <span class="hljs-number">85%</span> <span class="hljs-number">50%</span>);
+    }
+    
+    <span class="hljs-comment">/* Cool Colors */</span>
+    <span class="hljs-attr">--cool-palette</span>: {
+        <span class="hljs-attr">--primary</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">210</span> <span class="hljs-number">80%</span> <span class="hljs-number">50%</span>);
+        <span class="hljs-attr">--secondary</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">195</span> <span class="hljs-number">75%</span> <span class="hljs-number">50%</span>);
+        <span class="hljs-attr">--accent</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">225</span> <span class="hljs-number">85%</span> <span class="hljs-number">50%</span>);
+    }
+    
+    <span class="hljs-comment">/* Temperature Mixing */</span>
+    <span class="hljs-attr">--neutral-tone</span>: <span class="hljs-built_in">color-mix</span>(
+        in lch,
+        <span class="hljs-built_in">var</span>(--warm-palette-primary),
+        <span class="hljs-built_in">var</span>(--cool-palette-primary)
+    );
+}
+</code></pre>
+<h2 id="advanced-color-testing-strategies">Advanced Color Testing Strategies</h2>
+<h3 id="automated-color-testing">Automated Color Testing</h3>
+<p>Implementing automated tests for color systems:</p>
+<pre><code class="language-javascript"><span class="hljs-comment">// Color contrast testing utility</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">testColorContrast</span>(<span class="hljs-params">bgcolor, textcolor</span>) {
+    <span class="hljs-keyword">const</span> <span class="hljs-title function_">getRelativeLuminance</span> = (<span class="hljs-params">r, g, b</span>) =&gt; {
+        <span class="hljs-keyword">const</span> [rs, gs, bs] = [r, g, b].<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">c</span> =&gt;</span> {
+            c = c / <span class="hljs-number">255</span>;
+            <span class="hljs-keyword">return</span> c &lt;= <span class="hljs-number">0.03928</span>
+                ? c / <span class="hljs-number">12.92</span>
+                : <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">pow</span>((c + <span class="hljs-number">0.055</span>) / <span class="hljs-number">1.055</span>, <span class="hljs-number">2.4</span>);
+        });
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0.2126</span> * rs + <span class="hljs-number">0.7152</span> * gs + <span class="hljs-number">0.0722</span> * bs;
+    };
+    
+    <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">L1</span> = <span class="hljs-title function_">getRelativeLuminance</span>(...bgcolor);
+    <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">L2</span> = <span class="hljs-title function_">getRelativeLuminance</span>(...textcolor);
+    
+    <span class="hljs-keyword">const</span> ratio = (<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(<span class="hljs-variable constant_">L1</span>, <span class="hljs-variable constant_">L2</span>) + <span class="hljs-number">0.05</span>) / (<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(<span class="hljs-variable constant_">L1</span>, <span class="hljs-variable constant_">L2</span>) + <span class="hljs-number">0.05</span>);
+    
+    <span class="hljs-keyword">return</span> {
+        ratio,
+        <span class="hljs-attr">passesAA</span>: ratio &gt;= <span class="hljs-number">4.5</span>,
+        <span class="hljs-attr">passesAAA</span>: ratio &gt;= <span class="hljs-number">7</span>
+    };
+}
+
+<span class="hljs-comment">// CSS Custom Properties for testing</span>
+:root {
+    --test-<span class="hljs-attr">results</span>: <span class="hljs-title function_">registerProperty</span>({
+        <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;--contrast-ratio&#x27;</span>,
+        <span class="hljs-attr">syntax</span>: <span class="hljs-string">&#x27;&lt;number&gt;&#x27;</span>,
+        <span class="hljs-attr">initialValue</span>: <span class="hljs-string">&#x27;0&#x27;</span>,
+        <span class="hljs-attr">inherits</span>: <span class="hljs-literal">false</span>
+    });
+}
+</code></pre>
+<h3 id="visual-regression-testing">Visual Regression Testing</h3>
+<p>Implementing visual regression tests for color systems:</p>
+<pre><code class="language-javascript"><span class="hljs-comment">// Visual regression test setup</span>
+<span class="hljs-keyword">const</span> colorPalette = {
+    <span class="hljs-attr">primary</span>: <span class="hljs-string">&#x27;hsl(210 75% 50%)&#x27;</span>,
+    <span class="hljs-attr">secondary</span>: <span class="hljs-string">&#x27;hsl(270 75% 50%)&#x27;</span>,
+    <span class="hljs-attr">accent</span>: <span class="hljs-string">&#x27;hsl(30 75% 50%)&#x27;</span>
+};
+
+<span class="hljs-title function_">describe</span>(<span class="hljs-string">&#x27;Color System Tests&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+    <span class="hljs-title function_">it</span>(<span class="hljs-string">&#x27;maintains consistent color relationships&#x27;</span>, <span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-keyword">const</span> <span class="hljs-title function_">getHSL</span> = (<span class="hljs-params">color</span>) =&gt; {
+            <span class="hljs-comment">// Parse HSL values</span>
+            <span class="hljs-keyword">const</span> [h, s, l] = color.<span class="hljs-title function_">match</span>(<span class="hljs-regexp">/\d+/g</span>).<span class="hljs-title function_">map</span>(<span class="hljs-title class_">Number</span>);
+            <span class="hljs-keyword">return</span> { h, s, l };
+        };
+        
+        <span class="hljs-keyword">const</span> primary = <span class="hljs-title function_">getHSL</span>(colorPalette.<span class="hljs-property">primary</span>);
+        <span class="hljs-keyword">const</span> secondary = <span class="hljs-title function_">getHSL</span>(colorPalette.<span class="hljs-property">secondary</span>);
+        
+        <span class="hljs-comment">// Test color relationships</span>
+        <span class="hljs-title function_">expect</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">abs</span>(primary.<span class="hljs-property">h</span> - secondary.<span class="hljs-property">h</span>))
+            .<span class="hljs-title function_">toBeCloseTo</span>(<span class="hljs-number">60</span>, <span class="hljs-number">1</span>); <span class="hljs-comment">// Complementary check</span>
+        
+        <span class="hljs-title function_">expect</span>(primary.<span class="hljs-property">s</span>).<span class="hljs-title function_">toBe</span>(secondary.<span class="hljs-property">s</span>); <span class="hljs-comment">// Saturation consistency</span>
+    });
+});
+</code></pre>
+<h3 id="color-accessibility-testing">Color Accessibility Testing</h3>
+<p>Comprehensive accessibility testing implementation:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Accessibility Testing Utilities */</span>
+<span class="hljs-selector-class">.color-test-utils</span> {
+    <span class="hljs-comment">/* Test contrast ratios */</span>
+    <span class="hljs-attr">--foreground-rgb</span>: <span class="hljs-number">33</span>, <span class="hljs-number">33</span>, <span class="hljs-number">33</span>;
+    <span class="hljs-attr">--background-rgb</span>: <span class="hljs-number">255</span>, <span class="hljs-number">255</span>, <span class="hljs-number">255</span>;
+    
+    <span class="hljs-comment">/* Calculate contrast ratio */</span>
+    <span class="hljs-attr">--contrast-ratio</span>: <span class="hljs-built_in">calc</span>(
+        (<span class="hljs-built_in">var</span>(--foreground-luminance) + <span class="hljs-number">0.05</span>) /
+        (<span class="hljs-built_in">var</span>(--background-luminance) + <span class="hljs-number">0.05</span>)
+    );
+    
+    <span class="hljs-comment">/* Visual feedback for failing contrast */</span>
+    &amp;<span class="hljs-selector-attr">[data-contrast-ratio^=<span class="hljs-string">&quot;1&quot;</span>]</span>,
+    &amp;<span class="hljs-selector-attr">[data-contrast-ratio^=<span class="hljs-string">&quot;2&quot;</span>]</span>,
+    &amp;<span class="hljs-selector-attr">[data-contrast-ratio^=<span class="hljs-string">&quot;3&quot;</span>]</span> {
+        <span class="hljs-attribute">outline</span>: <span class="hljs-number">3px</span> solid red;
+    }
+}
+
+<span class="hljs-comment">/* Color Blindness Testing */</span>
+<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">prefers-color-scheme</span>: no-preference) {
+    <span class="hljs-selector-class">.color-blind-test</span> {
+        <span class="hljs-comment">/* Protanopia simulation */</span>
+        <span class="hljs-attribute">filter</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">&#x27;#protanopia-filter&#x27;</span>);
+        
+        <span class="hljs-comment">/* Deuteranopia simulation */</span>
+        <span class="hljs-attribute">filter</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">&#x27;#deuteranopia-filter&#x27;</span>);
+        
+        <span class="hljs-comment">/* Tritanopia simulation */</span>
+        <span class="hljs-attribute">filter</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">&#x27;#tritanopia-filter&#x27;</span>);
+    }
+}
+</code></pre>
+<h3 id="color-system-stress-testing">Color System Stress Testing</h3>
+<p>Testing color system resilience:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Stress Test Scenarios */</span>
+<span class="hljs-selector-class">.color-stress-test</span> {
+    <span class="hljs-comment">/* Extreme lightness values */</span>
+    <span class="hljs-attr">--stress-light</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-built_in">var</span>(--base-hue) <span class="hljs-built_in">var</span>(--base-saturation) <span class="hljs-number">95%</span>);
+    <span class="hljs-attr">--stress-dark</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-built_in">var</span>(--base-hue) <span class="hljs-built_in">var</span>(--base-saturation) <span class="hljs-number">5%</span>);
+    
+    <span class="hljs-comment">/* Saturation extremes */</span>
+    <span class="hljs-attr">--stress-saturation-high</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-built_in">var</span>(--base-hue) <span class="hljs-number">100%</span> <span class="hljs-built_in">var</span>(--base-lightness));
+    <span class="hljs-attr">--stress-saturation-low</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-built_in">var</span>(--base-hue) <span class="hljs-number">0%</span> <span class="hljs-built_in">var</span>(--base-lightness));
+    
+    <span class="hljs-comment">/* Dynamic range testing */</span>
+    <span class="hljs-keyword">@media</span> (<span class="hljs-attribute">dynamic-range</span>: high) {
+        <span class="hljs-attr">--stress-hdr</span>: <span class="hljs-built_in">color</span>(display-p3 <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span>);
+    }
+}
+
+<span class="hljs-comment">/* System Boundary Testing */</span>
+<span class="hljs-selector-class">.boundary-tests</span> {
+    <span class="hljs-comment">/* Alpha channel limits */</span>
+    <span class="hljs-attr">--alpha-edge-cases</span>: <span class="hljs-built_in">rgb</span>(<span class="hljs-number">255</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> / <span class="hljs-number">1%</span>)
+                       <span class="hljs-built_in">rgb</span>(<span class="hljs-number">255</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> / <span class="hljs-number">99%</span>);
+    
+    <span class="hljs-comment">/* Transition edge cases */</span>
+    <span class="hljs-attribute">transition</span>: color <span class="hljs-number">0.0001s</span>, color <span class="hljs-number">10000s</span>;
+    
+    <span class="hljs-comment">/* Color space conversion stress */</span>
+    <span class="hljs-attribute">background</span>: <span class="hljs-built_in">color-mix</span>(
+        in hsl,
+        <span class="hljs-built_in">rgb</span>(<span class="hljs-number">255</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span>),
+        <span class="hljs-built_in">lab</span>(<span class="hljs-number">100%</span> -<span class="hljs-number">128</span> <span class="hljs-number">128</span>)
+    );
+}
+</code></pre>
+<h3 id="performance-testing">Performance Testing</h3>
+<p>Testing color performance impact:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Performance Test Cases */</span>
+<span class="hljs-selector-class">.performance-test</span> {
+    <span class="hljs-comment">/* Color transition performance */</span>
+    <span class="hljs-attr">--transition-test</span>: {
+        <span class="hljs-attribute">transition</span>: background-color <span class="hljs-number">200ms</span> ease-in-out;
+        <span class="hljs-attribute">background-color</span>: <span class="hljs-built_in">var</span>(--dynamic-color);
+    }
+    
+    <span class="hljs-comment">/* Paint performance */</span>
+    <span class="hljs-attr">--paint-test</span>: {
+        <span class="hljs-attribute">background</span>: <span class="hljs-built_in">linear-gradient</span>(
+            <span class="hljs-built_in">var</span>(--angle),
+            <span class="hljs-built_in">var</span>(--color-<span class="hljs-number">1</span>),
+            <span class="hljs-built_in">var</span>(--color-<span class="hljs-number">2</span>)
+        );
+    }
+    
+    <span class="hljs-comment">/* Composition performance */</span>
+    <span class="hljs-attr">--blend-test</span>: {
+        <span class="hljs-attribute">background-blend-mode</span>: multiply;
+        <span class="hljs-attribute">background-image</span>: 
+            <span class="hljs-built_in">linear-gradient</span>(<span class="hljs-built_in">var</span>(--gradient-<span class="hljs-number">1</span>)),
+            <span class="hljs-built_in">linear-gradient</span>(<span class="hljs-built_in">var</span>(--gradient-<span class="hljs-number">2</span>));
+    }
+}
+</code></pre>
+<h3 id="color-system-documentation">Color System Documentation</h3>
+<p>Implementing living documentation for color systems:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Color System Documentation */</span>
+<span class="hljs-selector-pseudo">:root</span> {
+    <span class="hljs-comment">/* Primary Colors */</span>
+    <span class="hljs-attr">--color-primary-docs</span>: {
+        value: <span class="hljs-built_in">var</span>(--color-primary);
+        type: <span class="hljs-string">&#x27;color&#x27;</span>;
+        description: <span class="hljs-string">&#x27;Main brand color&#x27;</span>;
+        usage: <span class="hljs-string">&#x27;Primary actions, headers&#x27;</span>;
+        contrast-ratio: <span class="hljs-string">&#x27;4.5:1&#x27;</span>;
+    }
+    
+    <span class="hljs-comment">/* Color Relationships */</span>
+    <span class="hljs-attr">--color-relationship-docs</span>: {
+        complementary: <span class="hljs-built_in">var</span>(--color-complement);
+        analogous: [
+            <span class="hljs-built_in">var</span>(--color-analogous-<span class="hljs-number">1</span>),
+            <span class="hljs-built_in">var</span>(--color-analogous-<span class="hljs-number">2</span>)
+        ];
+        triadic: [
+            <span class="hljs-built_in">var</span>(--color-triad-<span class="hljs-number">1</span>),
+            <span class="hljs-built_in">var</span>(--color-triad-<span class="hljs-number">2</span>)
+        ];
+    }
+}
+</code></pre>
+<h1 id="advanced-color-accessibility-implementation-guide">Advanced Color Accessibility Implementation Guide</h1>
+<h2 id="understanding-color-perception-diversity">Understanding Color Perception Diversity</h2>
+<p>Different users perceive colors differently, and our implementations must account for these variations while maintaining design integrity. Let's explore how to create truly inclusive color systems.</p>
+<h3 id="advanced-contrast-ratio-implementation">Advanced Contrast Ratio Implementation</h3>
+<p>Modern accessibility requires going beyond simple contrast ratios. Here's how to implement sophisticated contrast handling:</p>
+<pre><code class="language-css"><span class="hljs-selector-pseudo">:root</span> {
+    <span class="hljs-comment">/* Dynamic contrast calculation system */</span>
+    <span class="hljs-attr">--luminance-calculator</span>: {
+        <span class="hljs-comment">/* Convert RGB to relative luminance */</span>
+        <span class="hljs-attr">--r</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--color-r) / <span class="hljs-number">255</span>);
+        <span class="hljs-attr">--g</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--color-g) / <span class="hljs-number">255</span>);
+        <span class="hljs-attr">--b</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--color-b) / <span class="hljs-number">255</span>);
+        
+        <span class="hljs-attr">--luminance</span>: <span class="hljs-built_in">calc</span>(
+            <span class="hljs-number">0.2126</span> * <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--r) * <span class="hljs-built_in">var</span>(--r)) +
+            <span class="hljs-number">0.7152</span> * <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--g) * <span class="hljs-built_in">var</span>(--g)) +
+            <span class="hljs-number">0.0722</span> * <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--b) * <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--b)))
+        );
+    }
+    
+    <span class="hljs-comment">/* Contrast enhancement system */</span>
+    <span class="hljs-attr">--contrast-enhancement</span>: {
+        <span class="hljs-comment">/* Automatically adjust text color based on background */</span>
+        <span class="hljs-attr">--text-color</span>: <span class="hljs-built_in">calc</span>(
+            <span class="hljs-built_in">var</span>(--background-luminance) &gt; <span class="hljs-number">0.5</span>
+            ? <span class="hljs-built_in">rgb</span>(<span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span>)
+            : <span class="hljs-built_in">rgb</span>(<span class="hljs-number">255</span> <span class="hljs-number">255</span> <span class="hljs-number">255</span>)
+        );
+        
+        <span class="hljs-comment">/* Ensure minimum contrast for small text */</span>
+        <span class="hljs-attr">--small-text-boost</span>: <span class="hljs-built_in">calc</span>(
+            <span class="hljs-built_in">var</span>(--contrast-ratio) &lt; <span class="hljs-number">4.5</span>
+            ? <span class="hljs-built_in">calc</span>((<span class="hljs-number">4.5</span> - <span class="hljs-built_in">var</span>(--contrast-ratio)) * <span class="hljs-number">10%</span>)
+            : <span class="hljs-number">0%</span>
+        );
+    }
+}
+</code></pre>
+<h3 id="color-vision-deficiency-support">Color Vision Deficiency Support</h3>
+<p>Implementing comprehensive support for various types of color vision deficiency:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.color-adaptive</span> {
+    <span class="hljs-comment">/* Base color definitions with multiple representations */</span>
+    <span class="hljs-attr">--important-color</span>: {
+        standard: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">0</span> <span class="hljs-number">80%</span> <span class="hljs-number">50%</span>);
+        deuteranopia: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">45</span> <span class="hljs-number">80%</span> <span class="hljs-number">50%</span>);
+        protanopia: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">45</span> <span class="hljs-number">80%</span> <span class="hljs-number">50%</span>);
+        tritanopia: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">180</span> <span class="hljs-number">80%</span> <span class="hljs-number">50%</span>);
+    }
+    
+    <span class="hljs-comment">/* Pattern reinforcement for color meaning */</span>
+    &amp;<span class="hljs-selector-class">.error-state</span> {
+        <span class="hljs-attribute">background</span>: <span class="hljs-built_in">var</span>(--important-color-standard);
+        <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">&#x27;data:image/svg+xml,...&#x27;</span>);  <span class="hljs-comment">/* Pattern for non-color identification */</span>
+        
+        <span class="hljs-comment">/* Ensure visibility across vision types */</span>
+        <span class="hljs-keyword">@media</span> (<span class="hljs-attribute">prefers-contrast</span>: more) {
+            <span class="hljs-attribute">border</span>: <span class="hljs-number">2px</span> solid currentColor;
+            <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">repeating-linear-gradient</span>(
+                <span class="hljs-number">45deg</span>,
+                transparent,
+                transparent <span class="hljs-number">10px</span>,
+                currentColor <span class="hljs-number">10px</span>,
+                currentColor <span class="hljs-number">20px</span>
+            );
+        }
+    }
+}
+</code></pre>
+<h3 id="context-aware-color-adaptation">Context-Aware Color Adaptation</h3>
+<p>Implementing sophisticated color adaptation based on environmental factors:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.adaptive-interface</span> {
+    <span class="hljs-comment">/* Light sensitivity considerations */</span>
+    <span class="hljs-keyword">@media</span> (<span class="hljs-attribute">prefers-reduced-motion</span>: reduce) {
+        <span class="hljs-attr">--transition-duration</span>: <span class="hljs-number">0ms</span>;
+        <span class="hljs-attr">--animation-duration</span>: <span class="hljs-number">0ms</span>;
+    }
+    
+    <span class="hljs-comment">/* Environmental light adaptation */</span>
+    <span class="hljs-keyword">@media</span> (<span class="hljs-attribute">light-level</span>: dim) {
+        <span class="hljs-attr">--color-intensity</span>: <span class="hljs-number">80%</span>;
+        <span class="hljs-attr">--contrast-boost</span>: <span class="hljs-number">1.2</span>;
+        
+        <span class="hljs-attribute">background-color</span>: <span class="hljs-built_in">hsl</span>(
+            <span class="hljs-built_in">var</span>(--base-hue)
+            <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--base-saturation) * <span class="hljs-built_in">var</span>(--color-intensity))
+            <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--base-lightness) * <span class="hljs-built_in">var</span>(--contrast-boost))
+        );
+    }
+    
+    <span class="hljs-comment">/* High contrast mode enhancements */</span>
+    <span class="hljs-keyword">@media</span> (<span class="hljs-attribute">forced-colors</span>: active) {
+        <span class="hljs-attr">--primary-color</span>: CanvasText;
+        <span class="hljs-attr">--secondary-color</span>: ButtonText;
+        <span class="hljs-attr">--background</span>: Canvas;
+        
+        <span class="hljs-comment">/* Preserve critical information */</span>
+        forced-<span class="hljs-attribute">color</span>-adjust: none;
+        <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid currentColor;
+    }
+}
+</code></pre>
+<h3 id="advanced-focus-indicators">Advanced Focus Indicators</h3>
+<p>Creating sophisticated focus indicators that work across different vision types:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.enhanced-focus</span> {
+    <span class="hljs-comment">/* Multiple focus indication methods */</span>
+    &amp;<span class="hljs-selector-pseudo">:focus</span>-visible {
+        <span class="hljs-attribute">outline</span>: <span class="hljs-number">3px</span> solid <span class="hljs-built_in">var</span>(--focus-color);
+        <span class="hljs-attribute">outline-offset</span>: <span class="hljs-number">2px</span>;
+        <span class="hljs-attribute">box-shadow</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">5px</span> <span class="hljs-built_in">rgba</span>(<span class="hljs-built_in">var</span>(--focus-rgb), <span class="hljs-number">0.3</span>);
+        
+        <span class="hljs-comment">/* Pattern-based focus indicator */</span>
+        <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">linear-gradient</span>(
+            <span class="hljs-number">45deg</span>,
+            transparent <span class="hljs-number">25%</span>,
+            <span class="hljs-built_in">rgba</span>(<span class="hljs-built_in">var</span>(--focus-rgb), <span class="hljs-number">0.1</span>) <span class="hljs-number">25%</span>
+        );
+        
+        <span class="hljs-comment">/* Ensure visibility in high contrast mode */</span>
+        <span class="hljs-keyword">@media</span> (<span class="hljs-attribute">forced-colors</span>: active) {
+            <span class="hljs-attribute">outline-color</span>: Highlight;
+            <span class="hljs-attribute">background-image</span>: none;
+            <span class="hljs-attribute">border</span>: <span class="hljs-number">2px</span> solid currentColor;
+        }
+    }
+}
+</code></pre>
+<h3 id="motion-and-animation-considerations">Motion and Animation Considerations</h3>
+<p>Implementing motion-sensitive color transitions:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.motion-sensitive</span> {
+    <span class="hljs-comment">/* Base transition settings */</span>
+    <span class="hljs-attr">--transition-config</span>: {
+        duration: <span class="hljs-built_in">var</span>(--user-preferred-duration, <span class="hljs-number">200ms</span>);
+        timing: ease-out;
+        properties: background-color, color, border-color;
+    }
+    
+    <span class="hljs-comment">/* Reduced motion adaptations */</span>
+    <span class="hljs-keyword">@media</span> (<span class="hljs-attribute">prefers-reduced-motion</span>: reduce) {
+        <span class="hljs-attr">--color-transition</span>: none;
+        
+        <span class="hljs-comment">/* Alternative non-motion indicators */</span>
+        &amp;<span class="hljs-selector-pseudo">:hover</span> {
+            <span class="hljs-attribute">border-width</span>: <span class="hljs-number">2px</span>;
+            <span class="hljs-attribute">padding</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--base-padding) - <span class="hljs-number">1px</span>);
+        }
+    }
+    
+    <span class="hljs-comment">/* Progressive enhancement for motion */</span>
+    <span class="hljs-keyword">@supports</span> (<span class="hljs-attribute">animation-timeline</span>: scroll()) {
+        <span class="hljs-attr">--color-shift</span>: <span class="hljs-built_in">scroll</span>();
+        <span class="hljs-attribute">background</span>: <span class="hljs-built_in">linear-gradient</span>(
+            to right,
+            <span class="hljs-built_in">var</span>(--color-start),
+            <span class="hljs-built_in">var</span>(--color-end)
+        );
+        <span class="hljs-attribute">animation</span>: color-scroll auto linear;
+        <span class="hljs-attribute">animation</span>-timeline: <span class="hljs-built_in">scroll</span>();
+    }
+}
+</code></pre>
+<h3 id="semantic-color-implementation">Semantic Color Implementation</h3>
+<p>Creating meaningful color associations that work across different perception types:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.semantic-colors</span> {
+    <span class="hljs-comment">/* Define semantic meanings with multiple indicators */</span>
+    <span class="hljs-attr">--status-success</span>: {
+        <span class="hljs-attribute">color</span>: <span class="hljs-built_in">rgb</span>(<span class="hljs-number">0</span> <span class="hljs-number">120</span> <span class="hljs-number">0</span>);
+        <span class="hljs-attribute">icon</span>: <span class="hljs-built_in">url</span>(<span class="hljs-string">&#x27;checkmark.svg&#x27;</span>);
+        pattern: <span class="hljs-built_in">repeating-linear-gradient</span>(
+            <span class="hljs-number">45deg</span>,
+            transparent,
+            transparent <span class="hljs-number">5px</span>,
+            currentColor <span class="hljs-number">5px</span>,
+            currentColor <span class="hljs-number">10px</span>
+        );
+        text: <span class="hljs-string">&#x27;Success&#x27;</span>;
+    }
+    
+    <span class="hljs-comment">/* Apply semantic indicators */</span>
+    &amp;<span class="hljs-selector-attr">[data-status=<span class="hljs-string">&quot;success&quot;</span>]</span> {
+        <span class="hljs-attribute">background</span>: <span class="hljs-built_in">var</span>(--status-success-color);
+        
+        &amp;<span class="hljs-selector-pseudo">::before</span> {
+            <span class="hljs-attribute">content</span>: <span class="hljs-built_in">var</span>(--status-success-text);
+            <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">var</span>(--status-success-pattern);
+        }
+        
+        <span class="hljs-comment">/* Ensure meaning is conveyed in forced-colors mode */</span>
+        <span class="hljs-keyword">@media</span> (<span class="hljs-attribute">forced-colors</span>: active) {
+            <span class="hljs-attribute">background</span>: Canvas;
+            <span class="hljs-attribute">border</span>: <span class="hljs-number">2px</span> solid currentColor;
+            
+            &amp;<span class="hljs-selector-pseudo">::before</span> {
+                <span class="hljs-attribute">background</span>: none;
+                <span class="hljs-attribute">text-decoration</span>: underline;
+            }
+        }
+    }
+}
+</code></pre>
+<h3 id="real-time-adaptation-system">Real-Time Adaptation System</h3>
+<p>Implementing a system that adapts to user interaction patterns:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.adaptive-system</span> {
+    <span class="hljs-comment">/* User interaction tracking */</span>
+    <span class="hljs-attr">--interaction-metrics</span>: {
+        hover-duration: <span class="hljs-built_in">var</span>(--hover-time, <span class="hljs-number">0ms</span>);
+        click-accuracy: <span class="hljs-built_in">var</span>(--click-precision, <span class="hljs-number">0</span>);
+        scroll-speed: <span class="hljs-built_in">var</span>(--scroll-velocity, <span class="hljs-number">0</span>);
+    }
+    
+    <span class="hljs-comment">/* Adaptive color system */</span>
+    <span class="hljs-attr">--color-adaptation</span>: {
+        contrast: <span class="hljs-built_in">calc</span>(
+            <span class="hljs-built_in">var</span>(--base-contrast) +
+            (<span class="hljs-built_in">var</span>(--hover-duration) &gt; <span class="hljs-number">1000ms</span> ? <span class="hljs-number">10%</span> : <span class="hljs-number">0%</span>)
+        );
+        
+        size: <span class="hljs-built_in">calc</span>(
+            <span class="hljs-built_in">var</span>(--base-size) *
+            (<span class="hljs-built_in">var</span>(--click-accuracy) &lt; <span class="hljs-number">0.8</span> ? <span class="hljs-number">1.2</span> : <span class="hljs-number">1</span>)
+        );
+    }
+    
+    <span class="hljs-comment">/* Apply adaptations */</span>
+    <span class="hljs-keyword">@media</span> (<span class="hljs-attribute">prefers-reduced-motion</span>: no-preference) {
+        <span class="hljs-attribute">transition</span>: all <span class="hljs-number">200ms</span> <span class="hljs-built_in">var</span>(--user-timing-function, ease-out);
+        
+        &amp;<span class="hljs-selector-pseudo">:hover</span> {
+            <span class="hljs-attr">--hover-time</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--hover-duration) + <span class="hljs-number">100ms</span>);
+        }
+    }
+}
+</code></pre>
+<h3 id="testing-and-validation-tools">Testing and Validation Tools</h3>
+<p>Creating built-in testing mechanisms for accessibility:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.accessibility-test</span> {
+    <span class="hljs-comment">/* Automated contrast checking */</span>
+    <span class="hljs-attr">--contrast-test</span>: {
+        <span class="hljs-attribute">background</span>: <span class="hljs-built_in">var</span>(--test-background);
+        <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--test-foreground);
+        
+        <span class="hljs-comment">/* Display warning when contrast is insufficient */</span>
+        &amp;<span class="hljs-selector-pseudo">::after</span> {
+            <span class="hljs-attribute">content</span>: <span class="hljs-built_in">var</span>(--contrast-warning);
+            <span class="hljs-attribute">display</span>: <span class="hljs-built_in">var</span>(--show-warning);
+            <span class="hljs-attribute">position</span>: absolute;
+            <span class="hljs-attribute">background</span>: yellow;
+            <span class="hljs-attribute">color</span>: black;
+            <span class="hljs-attribute">padding</span>: <span class="hljs-number">4px</span> <span class="hljs-number">8px</span>;
+        }
+    }
+    
+    <span class="hljs-comment">/* Vision simulation */</span>
+    <span class="hljs-attr">--vision-test</span>: {
+        <span class="hljs-attribute">filter</span>: <span class="hljs-built_in">var</span>(--vision-type);
+        <span class="hljs-attribute">opacity</span>: <span class="hljs-built_in">var</span>(--test-opacity, <span class="hljs-number">1</span>);
+    }
+}
+
+<span class="hljs-comment">/* Test implementation */</span>
+<span class="hljs-keyword">@custom-media</span> --test-mode (<span class="hljs-attribute">data-testid</span>: accessibility);
+
+<span class="hljs-keyword">@media</span> (--test-mode) {
+    * {
+        <span class="hljs-attribute">outline</span>: <span class="hljs-number">1px</span> solid <span class="hljs-built_in">rgba</span>(<span class="hljs-number">255</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> / <span class="hljs-number">20%</span>);
+        
+        &amp;<span class="hljs-selector-pseudo">::after</span> {
+            <span class="hljs-attribute">content</span>: <span class="hljs-built_in">attr</span>(class) <span class="hljs-string">&#x27; - &#x27;</span> <span class="hljs-built_in">attr</span>(style);
+            <span class="hljs-attribute">position</span>: absolute;
+            <span class="hljs-attribute">background</span>: black;
+            <span class="hljs-attribute">color</span>: white;
+            <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;
+            <span class="hljs-attribute">padding</span>: <span class="hljs-number">2px</span> <span class="hljs-number">4px</span>;
+        }
+    }
+}
+</code></pre>
+<h1 id="advanced-guide-to-css-specificity">Advanced Guide to CSS Specificity</h1>
+<h2 id="understanding-specificity-fundamentals">Understanding Specificity Fundamentals</h2>
+<p>Specificity is one of the core mechanisms that determines how CSS rules are applied to elements. Let's explore how it works from the ground up and then dive into advanced concepts.</p>
+<h3 id="the-specificity-algorithm">The Specificity Algorithm</h3>
+<p>Specificity is calculated as a four-part value (a,b,c,d), where:</p>
+<ul>
+<li>a: Inline styles</li>
+<li>b: ID selectors</li>
+<li>c: Classes, attributes, and pseudo-classes</li>
+<li>d: Elements and pseudo-elements</li>
+</ul>
+<pre><code class="language-css"><span class="hljs-comment">/* Specificity Examples with Values */</span>
+
+<span class="hljs-comment">/* (0,0,0,1) - One element */</span>
+<span class="hljs-selector-tag">p</span> {
+    <span class="hljs-attribute">color</span>: blue;
+}
+
+<span class="hljs-comment">/* (0,0,1,1) - One class, one element */</span>
+<span class="hljs-selector-class">.text-content</span> <span class="hljs-selector-tag">p</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+
+<span class="hljs-comment">/* (0,1,0,1) - One ID, one element */</span>
+<span class="hljs-selector-id">#header</span> <span class="hljs-selector-tag">h1</span> {
+    <span class="hljs-attribute">color</span>: green;
+}
+
+<span class="hljs-comment">/* (1,0,0,0) - Inline style */</span>
+&lt;<span class="hljs-selector-tag">div</span> style=&quot;<span class="hljs-attribute">color</span>: purple;&quot;&gt;
+</code></pre>
+<h3 id="specificity-calculation-in-practice">Specificity Calculation in Practice</h3>
+<p>Let's examine how specificity works in real-world scenarios:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Complex Specificity Examples */</span>
+
+<span class="hljs-comment">/* Specificity: (0,0,2,2) */</span>
+<span class="hljs-selector-class">.sidebar</span> <span class="hljs-selector-class">.content</span> <span class="hljs-selector-tag">p</span> <span class="hljs-selector-tag">span</span> {
+    <span class="hljs-attribute">color</span>: blue;
+}
+
+<span class="hljs-comment">/* Specificity: (0,1,1,1) */</span>
+<span class="hljs-selector-id">#main</span> <span class="hljs-selector-class">.content</span> <span class="hljs-selector-tag">p</span> {
+    <span class="hljs-attribute">color</span>: red;
+}
+
+<span class="hljs-comment">/* Specificity: (0,0,3,0) */</span>
+<span class="hljs-selector-class">.header</span><span class="hljs-selector-class">.dark</span><span class="hljs-selector-class">.responsive</span> {
+    <span class="hljs-attribute">color</span>: green;
+}
+
+<span class="hljs-comment">/* Specificity: (0,0,2,1) */</span>
+<span class="hljs-selector-class">.nav</span><span class="hljs-selector-pseudo">:not</span>(<span class="hljs-selector-class">.mobile</span>) <span class="hljs-selector-tag">a</span> {
+    <span class="hljs-attribute">color</span>: purple;
+}
+</code></pre>
+<h2 id="advanced-specificity-concepts">Advanced Specificity Concepts</h2>
+<h3 id="specificity-with-modern-selectors">Specificity with Modern Selectors</h3>
+<p>Modern CSS introduces new selector patterns that affect specificity:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* :is() and :where() Specificity */</span>
+<span class="hljs-comment">/* :is() takes the highest specificity of its arguments */</span>
+<span class="hljs-selector-pseudo">:is</span>(<span class="hljs-selector-id">#header</span>, <span class="hljs-selector-class">.banner</span>, <span class="hljs-selector-tag">h1</span>) {
+    <span class="hljs-comment">/* Specificity: (0,1,0,0) due to #header being highest */</span>
+    <span class="hljs-comment">/* This means it matches any of these selectors, but uses #header&#x27;s specificity:
+       - #header (ID selector: 0,1,0,0)
+       - .banner (class selector: 0,0,1,0)
+       - h1 (element selector: 0,0,0,1)
+       The highest specificity wins, so it takes #header&#x27;s specificity */</span>
+    <span class="hljs-attribute">color</span>: blue;
+}
+
+<span class="hljs-comment">/* :where() always has zero specificity */</span>
+<span class="hljs-selector-pseudo">:where</span>(<span class="hljs-selector-id">#header</span>, <span class="hljs-selector-class">.banner</span>, <span class="hljs-selector-tag">h1</span>) {
+    <span class="hljs-comment">/* Specificity: (0,0,0,0) */</span>
+    <span class="hljs-comment">/* Despite containing high-specificity selectors like #header,
+       :where() deliberately ignores their specificity values.
+       This makes it easier to override these styles later,
+       useful for creating more maintainable default styles */</span>
+    <span class="hljs-attribute">color</span>: red;
+}
+
+<span class="hljs-comment">/* Complex Modern Selectors */</span>
+<span class="hljs-selector-class">.container</span> <span class="hljs-selector-pseudo">:has</span>(&gt; <span class="hljs-selector-tag">img</span>) {
+    <span class="hljs-comment">/* Specificity: (0,0,2,0) - one for .container, one for :has() */</span>
+    <span class="hljs-comment">/* :has() is a relational pseudo-class that adds to specificity
+       This selector matches any .container that has a direct img child
+       The &#x27;&gt;&#x27; in :has(&gt; img) means direct child, not any descendant */</span>
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">1rem</span>;
+}
+
+<span class="hljs-comment">/* Layer-based Specificity */</span>
+<span class="hljs-keyword">@layer</span> base, components, utilities;
+<span class="hljs-comment">/* Layers are declared in order of increasing precedence
+   utilities will override components, which override base
+   This happens regardless of specificity within each layer */</span>
+
+<span class="hljs-keyword">@layer</span> base {
+    <span class="hljs-comment">/* Lower precedence regardless of specificity */</span>
+    <span class="hljs-selector-class">.header</span> {
+        <span class="hljs-comment">/* Even if this had an ID selector with higher specificity,
+           it would still be overridden by any competing styles
+           in the components or utilities layers */</span>
+        <span class="hljs-attribute">color</span>: blue;
+    }
+}
+
+<span class="hljs-comment">/* Example of layer override */</span>
+<span class="hljs-keyword">@layer</span> components {
+    <span class="hljs-selector-class">.header</span> {
+        <span class="hljs-comment">/* This will override the base layer&#x27;s .header
+           even though they have the same specificity,
+           because components layer has higher precedence */</span>
+        <span class="hljs-attribute">color</span>: red;
+    }
+}
+
+<span class="hljs-comment">/* Combining layers with modern selectors */</span>
+<span class="hljs-keyword">@layer</span> utilities {
+    <span class="hljs-selector-pseudo">:where</span>(<span class="hljs-selector-class">.header</span>) {
+        <span class="hljs-comment">/* Zero specificity but highest layer precedence
+           Makes it easy to override while maintaining
+           the layer system&#x27;s benefits */</span>
+        <span class="hljs-attribute">color</span>: green;
+    }
+}
+</code></pre>
+<h3 id="managing-specificity-in-large-applications">Managing Specificity in Large Applications</h3>
+<p>Complex applications require careful specificity management:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Specificity Isolation */</span>
+<span class="hljs-selector-class">.isolated-component</span> {
+    <span class="hljs-comment">/* Create a new stacking context */</span>
+    <span class="hljs-attribute">isolation</span>: isolate;
+    
+    <span class="hljs-comment">/* Reset inherited styles */</span>
+    <span class="hljs-attribute">all</span>: initial;
+    
+    <span class="hljs-comment">/* Component styles */</span>
+    &amp; &gt; * {
+        <span class="hljs-comment">/* Reestablish desired inheritance */</span>
+        <span class="hljs-attribute">color</span>: inherit;
+        <span class="hljs-attribute">font</span>: inherit;
+    }
+}
+
+<span class="hljs-comment">/* Specificity Scaling */</span>
+<span class="hljs-selector-class">.component</span> {
+    <span class="hljs-comment">/* Base styles */</span>
+    <span class="hljs-attribute">display</span>: flex;
+    
+    <span class="hljs-comment">/* Variants with controlled specificity */</span>
+    &amp;<span class="hljs-selector-attr">[data-variant=<span class="hljs-string">&quot;primary&quot;</span>]</span> {
+        <span class="hljs-attribute">background</span>: blue;
+    }
+    
+    <span class="hljs-comment">/* States with predictable specificity */</span>
+    &amp;<span class="hljs-selector-pseudo">:is</span>(<span class="hljs-selector-attr">[data-state=<span class="hljs-string">&quot;active&quot;</span>]</span>, <span class="hljs-selector-attr">[data-state=<span class="hljs-string">&quot;hover&quot;</span>]</span>) {
+        <span class="hljs-attribute">background</span>: lightblue;
+    }
+}
+</code></pre>
+<h3 id="specificity-in-component-systems">Specificity in Component Systems</h3>
+<p>Modern component-based architectures require special consideration:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Component Encapsulation */</span>
+<span class="hljs-selector-class">.card</span> {
+    <span class="hljs-comment">/* Base component */</span>
+    <span class="hljs-attr">--card-padding</span>: <span class="hljs-number">1rem</span>;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-built_in">var</span>(--card-padding);
+    
+    <span class="hljs-comment">/* Scoped child elements */</span>
+    &amp; &gt; <span class="hljs-selector-class">.card__title</span> {
+        <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--card-padding) / <span class="hljs-number">2</span>);
+    }
+    
+    <span class="hljs-comment">/* Variant handling */</span>
+    &amp;<span class="hljs-attr">--large</span> {
+        <span class="hljs-attr">--card-padding</span>: <span class="hljs-number">2rem</span>;
+    }
+}
+
+<span class="hljs-comment">/* Specificity Boundaries */</span>
+<span class="hljs-selector-class">.theme-container</span> {
+    <span class="hljs-comment">/* Theme boundary */</span>
+    <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--theme-color);
+    
+    <span class="hljs-comment">/* Override protection */</span>
+    <span class="hljs-selector-pseudo">:where</span>(&amp;) <span class="hljs-selector-class">.protected-content</span> {
+        <span class="hljs-comment">/* Styles that shouldn&#x27;t be easily overridden */</span>
+        <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--protected-color);
+    }
+}
+</code></pre>
+<h3 id="dealing-with-third-party-styles">Dealing with Third-Party Styles</h3>
+<p>Managing specificity when integrating external styles:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Third-party Style Integration */</span>
+<span class="hljs-selector-pseudo">:where</span>(<span class="hljs-selector-class">.third-party-component</span>) {
+    <span class="hljs-comment">/* Reset third-party styles without specificity increase */</span>
+    <span class="hljs-attribute">all</span>: revert;
+}
+
+<span class="hljs-comment">/* Targeted Override System */</span>
+<span class="hljs-selector-class">.app-styles</span> {
+    <span class="hljs-comment">/* Create a new cascade layer for app styles */</span>
+    <span class="hljs-keyword">@layer</span> third-party, overrides;
+    
+    <span class="hljs-keyword">@layer</span> overrides {
+        <span class="hljs-comment">/* Override with minimal specificity */</span>
+        <span class="hljs-selector-pseudo">:where</span>(<span class="hljs-selector-class">.third-party-component</span>) {
+            <span class="hljs-comment">/* Custom styles */</span>
+            <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--app-color);
+        }
+    }
+}
+</code></pre>
+<h3 id="performance-and-maintainability">Performance and Maintainability</h3>
+<p>Optimizing specificity for better performance:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Efficient Selectors */</span>
+<span class="hljs-selector-class">.optimized-component</span> {
+    <span class="hljs-comment">/* Direct child selectors for better performance */</span>
+    &gt; <span class="hljs-selector-class">.child</span> {
+        <span class="hljs-attribute">color</span>: blue;
+    }
+    
+    <span class="hljs-comment">/* Avoid deep nesting */</span>
+    <span class="hljs-selector-class">.nested</span> &amp; {
+        <span class="hljs-comment">/* Use parent reference instead of nesting */</span>
+        <span class="hljs-attribute">color</span>: red;
+    }
+}
+
+<span class="hljs-comment">/* Maintainable Specificity Patterns */</span>
+<span class="hljs-selector-class">.maintainable</span> {
+    <span class="hljs-comment">/* Use custom properties for value inheritance */</span>
+    <span class="hljs-attr">--text-color</span>: <span class="hljs-built_in">var</span>(--parent-text-color, inherit);
+    <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--text-color);
+    
+    <span class="hljs-comment">/* Predictable state handling */</span>
+    &amp;<span class="hljs-selector-attr">[aria-selected=<span class="hljs-string">&quot;true&quot;</span>]</span> {
+        <span class="hljs-attr">--text-color</span>: <span class="hljs-built_in">var</span>(--selected-color);
+    }
+}
+</code></pre>
+<h3 id="testing-and-debugging-specificity">Testing and Debugging Specificity</h3>
+<p>Tools and techniques for managing specificity:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Specificity Debugging */</span>
+<span class="hljs-selector-class">.debug-styles</span> {
+    <span class="hljs-comment">/* Add visual indicators for specificity conflicts */</span>
+    <span class="hljs-attribute">outline</span>: <span class="hljs-number">3px</span> solid red <span class="hljs-meta">!important</span>; <span class="hljs-comment">/* Specificity issues */</span>
+    
+    <span class="hljs-comment">/* Debug information */</span>
+    &amp;<span class="hljs-selector-pseudo">::after</span> {
+        <span class="hljs-attribute">content</span>: <span class="hljs-built_in">attr</span>(class) <span class="hljs-string">&#x27; - Specificity: &#x27;</span> <span class="hljs-built_in">attr</span>(data-specificity);
+        <span class="hljs-attribute">position</span>: absolute;
+        <span class="hljs-attribute">background</span>: black;
+        <span class="hljs-attribute">color</span>: white;
+        <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;
+        <span class="hljs-attribute">padding</span>: <span class="hljs-number">2px</span> <span class="hljs-number">4px</span>;
+    }
+}
+
+<span class="hljs-comment">/* Specificity Testing */</span>
+<span class="hljs-selector-pseudo">:where</span>(<span class="hljs-selector-attr">[data-testid=<span class="hljs-string">&quot;specificity&quot;</span>]</span>) {
+    <span class="hljs-comment">/* Test different specificity combinations */</span>
+    &amp;<span class="hljs-selector-class">.test-case</span> {
+        <span class="hljs-comment">/* Should override */</span>
+        <span class="hljs-attribute">color</span>: red;
+    }
+    
+    <span class="hljs-comment">/* Should not override */</span>
+    &amp;<span class="hljs-selector-pseudo">:where</span>(<span class="hljs-selector-class">.test-case</span>) {
+        <span class="hljs-attribute">color</span>: blue;
+    }
+}
+</code></pre>
+<h3 id="best-practices-and-guidelines">Best Practices and Guidelines</h3>
+<p>Recommended patterns for specificity management:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Specificity Scale */</span>
+<span class="hljs-selector-class">.component</span> {
+    <span class="hljs-comment">/* Low specificity base styles */</span>
+    <span class="hljs-selector-pseudo">:where</span>(&amp;) {
+        <span class="hljs-attribute">display</span>: block;
+    }
+    
+    <span class="hljs-comment">/* Medium specificity variations */</span>
+    &amp;<span class="hljs-selector-attr">[data-variant]</span> {
+        <span class="hljs-attribute">padding</span>: <span class="hljs-number">1rem</span>;
+    }
+    
+    <span class="hljs-comment">/* High specificity overrides */</span>
+    &amp;<span class="hljs-selector-pseudo">:is</span>(<span class="hljs-selector-attr">[data-important]</span>) {
+        <span class="hljs-attribute">border</span>: <span class="hljs-number">2px</span> solid red;
+    }
+}
+
+<span class="hljs-comment">/* CSS Custom Properties for Specificity Control */</span>
+<span class="hljs-selector-class">.theme</span> {
+    <span class="hljs-comment">/* Theme-level custom properties */</span>
+    <span class="hljs-attr">--theme-color</span>: blue;
+    
+    <span class="hljs-comment">/* Component-level overrides */</span>
+    <span class="hljs-attr">--component-color</span>: <span class="hljs-built_in">var</span>(--override-color, <span class="hljs-built_in">var</span>(--theme-color));
+    
+    <span class="hljs-comment">/* Instance-level customization */</span>
+    &amp;<span class="hljs-selector-attr">[data-custom]</span> {
+        <span class="hljs-attr">--override-color</span>: green;
+    }
+}
+</code></pre>
+<h1 id="box-sizing">Box Sizing</h1>
+<h2 id="understanding-the-box-model-at-a-deep-level">Understanding the Box Model at a Deep Level</h2>
+<p>The box model forms the foundation of layout in CSS, but its complexity goes far beyond the basic content-padding-border-margin relationship. Let's explore its nuances and advanced applications.</p>
+<h3 id="box-sizing-fundamentals-revisited">Box Sizing Fundamentals Revisited</h3>
+<p>First, let's examine how different box-sizing values affect layout calculations:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Box Sizing Fundamentals */</span>
+
+<span class="hljs-comment">/* Traditional Box Model (content-box) */</span>
+<span class="hljs-selector-class">.content-box-example</span> {
+    <span class="hljs-attribute">box-sizing</span>: content-box;
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">200px</span>;
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">20px</span>;
+    <span class="hljs-attribute">border</span>: <span class="hljs-number">5px</span> solid <span class="hljs-number">#333</span>;
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span>;
+    <span class="hljs-comment">/* Actual total width: 200px + (20px * 2) + (5px * 2) = 250px
+       Actual total height: 100px + (20px * 2) + (5px * 2) = 150px
+       The padding and border are added to the specified dimensions */</span>
+}
+
+<span class="hljs-comment">/* Modern Box Model (border-box) */</span>
+<span class="hljs-selector-class">.border-box-example</span> {
+    <span class="hljs-attribute">box-sizing</span>: border-box;
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">200px</span>;
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">20px</span>;
+    <span class="hljs-attribute">border</span>: <span class="hljs-number">5px</span> solid <span class="hljs-number">#333</span>;
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span>;
+    <span class="hljs-comment">/* Total width stays at 200px
+       Content width: 200px - (20px * 2) - (5px * 2) = 150px
+       Content height: 100px - (20px * 2) - (5px * 2) = 50px */</span>
+}
+
+<span class="hljs-comment">/* Global Box Sizing Reset */</span>
+<span class="hljs-selector-pseudo">:root</span> {
+    <span class="hljs-attribute">box-sizing</span>: border-box;
+}
+
+*, *<span class="hljs-selector-pseudo">::before</span>, *<span class="hljs-selector-pseudo">::after</span> {
+    <span class="hljs-attribute">box-sizing</span>: inherit;
+    <span class="hljs-comment">/* This allows components to change their box-sizing model
+       while maintaining consistency within their subtree */</span>
+}
+
+<span class="hljs-comment">/* Margin Collapsing Examples */</span>
+
+<span class="hljs-comment">/* Vertical Margin Collapse */</span>
+<span class="hljs-selector-class">.parent</span> {
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">20px</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-selector-class">.child</span> {
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">30px</span> <span class="hljs-number">0</span>;
+    <span class="hljs-comment">/* Only the larger 30px margin applies between parent and child
+       This is margin collapsing in action */</span>
+}
+
+<span class="hljs-comment">/* Preventing Margin Collapse */</span>
+<span class="hljs-selector-class">.no-collapse</span> {
+    <span class="hljs-comment">/* Methods to prevent margin collapse */</span>
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">1px</span>; <span class="hljs-comment">/* Adding padding */</span>
+    <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid transparent; <span class="hljs-comment">/* Adding border */</span>
+    <span class="hljs-attribute">display</span>: flex; <span class="hljs-comment">/* Using flex container */</span>
+    <span class="hljs-comment">/* overflow: hidden; /* Using overflow other than visible */</span>
+}
+
+<span class="hljs-comment">/* Block vs Inline Layout */</span>
+<span class="hljs-selector-class">.block-element</span> {
+    <span class="hljs-attribute">display</span>: block;
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span> <span class="hljs-number">0</span>; <span class="hljs-comment">/* Vertical margins respected */</span>
+}
+
+<span class="hljs-selector-class">.inline-element</span> {
+    <span class="hljs-attribute">display</span>: inline;
+    <span class="hljs-comment">/* width and height are ignored */</span>
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span>; <span class="hljs-comment">/* Horizontal margins only */</span>
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>; <span class="hljs-comment">/* Padding applies but doesn&#x27;t affect line height */</span>
+}
+
+<span class="hljs-comment">/* Inline-Block Behavior */</span>
+<span class="hljs-selector-class">.inline-block</span> {
+    <span class="hljs-attribute">display</span>: inline-block;
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">200px</span>; <span class="hljs-comment">/* Width is respected */</span>
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>; <span class="hljs-comment">/* Height is respected */</span>
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">10px</span>; <span class="hljs-comment">/* All margins are respected */</span>
+    <span class="hljs-attribute">vertical-align</span>: middle; <span class="hljs-comment">/* Controls alignment with text */</span>
+}
+
+<span class="hljs-comment">/* Containing Block Examples */</span>
+<span class="hljs-selector-class">.relative-parent</span> {
+    <span class="hljs-attribute">position</span>: relative;
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">500px</span>;
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">300px</span>;
+}
+
+<span class="hljs-selector-class">.absolute-child</span> {
+    <span class="hljs-attribute">position</span>: absolute;
+    <span class="hljs-attribute">top</span>: <span class="hljs-number">50%</span>; <span class="hljs-comment">/* Positioned relative to parent */</span>
+    <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">50%</span>; <span class="hljs-comment">/* 50% of parent width */</span>
+    <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translate</span>(-<span class="hljs-number">50%</span>, -<span class="hljs-number">50%</span>); <span class="hljs-comment">/* Center alignment trick */</span>
+}
+
+<span class="hljs-comment">/* Min/Max Content Sizing */</span>
+<span class="hljs-selector-class">.content-sizing</span> {
+    <span class="hljs-comment">/* Natural minimum content width */</span>
+    <span class="hljs-attribute">width</span>: min-content;
+    <span class="hljs-comment">/* Natural maximum content width */</span>
+    <span class="hljs-attribute">width</span>: max-content;
+    <span class="hljs-comment">/* Fit content within constraints */</span>
+    <span class="hljs-attribute">width</span>: fit-content;
+    <span class="hljs-comment">/* Clamp between minimum and maximum */</span>
+    <span class="hljs-attribute">width</span>: <span class="hljs-built_in">clamp</span>(<span class="hljs-number">200px</span>, <span class="hljs-number">50%</span>, <span class="hljs-number">800px</span>);
+}
+
+<span class="hljs-comment">/* Auto Margins for Alignment */</span>
+<span class="hljs-selector-class">.auto-margins</span> {
+    <span class="hljs-comment">/* Center block element horizontally */</span>
+    <span class="hljs-attribute">margin-left</span>: auto;
+    <span class="hljs-attribute">margin-right</span>: auto;
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">80%</span>;
+    
+    <span class="hljs-comment">/* Push element to right */</span>
+    <span class="hljs-attribute">margin-left</span>: auto;
+    <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-comment">/* Modern Length Units */</span>
+<span class="hljs-selector-class">.modern-units</span> {
+    <span class="hljs-comment">/* Viewport units */</span>
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">50vw</span>; <span class="hljs-comment">/* 50% of viewport width */</span>
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">50vh</span>; <span class="hljs-comment">/* 50% of viewport height */</span>
+    
+    <span class="hljs-comment">/* Container query units */</span>
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">80</span>cqw; <span class="hljs-comment">/* 80% of container query width */</span>
+    
+    <span class="hljs-comment">/* Logical properties */</span>
+    <span class="hljs-attribute">margin-block</span>: <span class="hljs-number">1rem</span>; <span class="hljs-comment">/* Vertical margins */</span>
+    <span class="hljs-attribute">margin-inline</span>: <span class="hljs-number">2rem</span>; <span class="hljs-comment">/* Horizontal margins */</span>
+    
+    <span class="hljs-comment">/* Dynamic viewport units */</span>
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">100</span>dvh; <span class="hljs-comment">/* Dynamic viewport height */</span>
+}
+
+<span class="hljs-comment">/* Writing Mode Considerations */</span>
+<span class="hljs-selector-class">.writing-mode-example</span> {
+    <span class="hljs-attribute">writing-mode</span>: vertical-rl;
+    <span class="hljs-comment">/* In vertical writing mode:
+       - width becomes height
+       - height becomes width
+       - margin-top becomes margin-right
+       This is why logical properties are important */</span>
+}
+</code></pre>
+<h3 id="advanced-box-sizing-scenarios">Advanced Box Sizing Scenarios</h3>
+<p>Let's explore complex scenarios that senior developers often encounter:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Mixed Box Sizing Management */</span>
+<span class="hljs-selector-class">.container</span> {
+    <span class="hljs-comment">/* Container with border-box */</span>
+    <span class="hljs-attribute">box-sizing</span>: border-box;
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">20px</span>;
+    
+    <span class="hljs-comment">/* Child with content-box for specific layout needs */</span>
+    &amp; &gt; <span class="hljs-selector-class">.special-child</span> {
+        <span class="hljs-attribute">box-sizing</span>: content-box;
+        <span class="hljs-attribute">width</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-number">100%</span> - <span class="hljs-number">40px</span>); <span class="hljs-comment">/* Compensate for parent padding */</span>
+        <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;
+    }
+}
+
+<span class="hljs-comment">/* Dynamic Box Sizing */</span>
+<span class="hljs-selector-class">.flexible-component</span> {
+    <span class="hljs-attr">--base-padding</span>: <span class="hljs-number">20px</span>;
+    <span class="hljs-attr">--border-width</span>: <span class="hljs-number">2px</span>;
+    
+    <span class="hljs-comment">/* Dynamic size calculations */</span>
+    <span class="hljs-attribute">width</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-number">100%</span> - (<span class="hljs-built_in">var</span>(--base-padding) * <span class="hljs-number">2</span>));
+    <span class="hljs-attribute">padding</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--base-padding) - <span class="hljs-built_in">var</span>(--border-width));
+    <span class="hljs-attribute">border</span>: <span class="hljs-built_in">var</span>(--border-width) solid currentColor;
+    
+    <span class="hljs-comment">/* Responsive adjustments */</span>
+    <span class="hljs-keyword">@media</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">768px</span>) {
+        <span class="hljs-attr">--base-padding</span>: <span class="hljs-number">40px</span>;
+    }
+}
+</code></pre>
+<h3 id="box-sizing-with-grid-and-flexbox">Box Sizing with Grid and Flexbox</h3>
+<p>Modern layout systems interact with box sizing in specific ways:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.grid-container</span> {
+    <span class="hljs-attribute">display</span>: grid;
+    <span class="hljs-attribute">grid-template-columns</span>: <span class="hljs-built_in">repeat</span>(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>fr);
+    <span class="hljs-attribute">gap</span>: <span class="hljs-number">20px</span>;
+    
+    <span class="hljs-comment">/* Grid items with mixed box sizing */</span>
+    <span class="hljs-selector-class">.grid-item</span> {
+        <span class="hljs-attribute">box-sizing</span>: border-box;
+        <span class="hljs-attribute">padding</span>: <span class="hljs-number">20px</span>;
+        
+        <span class="hljs-comment">/* Handle nested content */</span>
+        &amp; &gt; <span class="hljs-selector-tag">img</span> {
+            <span class="hljs-attribute">box-sizing</span>: content-box;
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+            <span class="hljs-attribute">padding</span>: <span class="hljs-number">5px</span>;
+            <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-number">#ccc</span>;
+        }
+    }
+}
+
+<span class="hljs-comment">/* Flex Box Sizing Patterns */</span>
+<span class="hljs-selector-class">.flex-container</span> {
+    <span class="hljs-attribute">display</span>: flex;
+    <span class="hljs-attribute">gap</span>: <span class="hljs-number">1rem</span>;
+    
+    <span class="hljs-comment">/* Flex items with different sizing needs */</span>
+    <span class="hljs-selector-class">.flex-item</span> {
+        <span class="hljs-attribute">flex</span>: <span class="hljs-number">1</span>;
+        <span class="hljs-attribute">box-sizing</span>: border-box;
+        
+        &amp;<span class="hljs-selector-class">.fixed-width</span> {
+            <span class="hljs-attribute">flex</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> auto;
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">200px</span>;
+            <span class="hljs-attribute">box-sizing</span>: content-box;
+            <span class="hljs-attribute">padding</span>: <span class="hljs-number">1rem</span>;
+        }
+    }
+}
+</code></pre>
+<h3 id="complex-layout-calculations">Complex Layout Calculations</h3>
+<p>Handling intricate layout scenarios with precise box sizing:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.complex-layout</span> {
+    <span class="hljs-comment">/* Base container */</span>
+    <span class="hljs-attr">--container-padding</span>: <span class="hljs-built_in">clamp</span>(<span class="hljs-number">1rem</span>, <span class="hljs-number">5vw</span>, <span class="hljs-number">3rem</span>);
+    <span class="hljs-attr">--border-width</span>: <span class="hljs-number">2px</span>;
+    
+    <span class="hljs-comment">/* Size calculations considering box model */</span>
+    <span class="hljs-attr">--total-horizontal-space</span>: <span class="hljs-built_in">calc</span>(
+        <span class="hljs-built_in">var</span>(--container-padding) * <span class="hljs-number">2</span> + 
+        <span class="hljs-built_in">var</span>(--border-width) * <span class="hljs-number">2</span>
+    );
+    
+    <span class="hljs-attribute">width</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-number">100%</span> - <span class="hljs-built_in">var</span>(--total-horizontal-space));
+    <span class="hljs-attribute">max-width</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-number">1200px</span> - <span class="hljs-built_in">var</span>(--total-horizontal-space));
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-built_in">var</span>(--container-padding);
+    <span class="hljs-attribute">border</span>: <span class="hljs-built_in">var</span>(--border-width) solid;
+    
+    <span class="hljs-comment">/* Nested element sizing */</span>
+    <span class="hljs-selector-class">.nested-content</span> {
+        <span class="hljs-attr">--nested-margin</span>: <span class="hljs-number">1rem</span>;
+        <span class="hljs-attribute">width</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-number">100%</span> + (<span class="hljs-built_in">var</span>(--nested-margin) * <span class="hljs-number">2</span>));
+        <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--nested-margin) * -<span class="hljs-number">1</span>);
+        <span class="hljs-attribute">padding</span>: <span class="hljs-built_in">var</span>(--nested-margin);
+    }
+}
+</code></pre>
+<h3 id="performance-optimization-2">Performance Optimization</h3>
+<p>Optimizing box sizing for better performance:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.optimized-component</span> {
+    <span class="hljs-comment">/* Prevent layout thrashing */</span>
+    <span class="hljs-attribute">contain</span>: size layout;
+    
+    <span class="hljs-comment">/* Hardware acceleration for animations */</span>
+    <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateZ</span>(<span class="hljs-number">0</span>);
+    <span class="hljs-attribute">will-change</span>: transform;
+    
+    <span class="hljs-comment">/* Efficient animations */</span>
+    <span class="hljs-attribute">transition</span>: padding <span class="hljs-number">200ms</span> ease-out;
+    
+    &amp;<span class="hljs-selector-pseudo">:hover</span> {
+        <span class="hljs-attribute">padding</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--base-padding) * <span class="hljs-number">1.2</span>);
+    }
+}
+</code></pre>
+<h3 id="box-sizing-with-custom-properties">Box Sizing with Custom Properties</h3>
+<p>Advanced usage of custom properties for dynamic box sizing:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.dynamic-sizing</span> {
+    <span class="hljs-comment">/* Size tokens */</span>
+    <span class="hljs-attr">--size-unit</span>: <span class="hljs-number">8px</span>;
+    <span class="hljs-attr">--spacing-multiplier</span>: <span class="hljs-number">3</span>;
+    <span class="hljs-attr">--border-scale</span>: <span class="hljs-number">0.25</span>;
+    
+    <span class="hljs-comment">/* Computed values */</span>
+    <span class="hljs-attr">--computed-padding</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--size-unit) * <span class="hljs-built_in">var</span>(--spacing-multiplier));
+    <span class="hljs-attr">--computed-border</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--size-unit) * <span class="hljs-built_in">var</span>(--border-scale));
+    
+    <span class="hljs-comment">/* Applied sizing */</span>
+    <span class="hljs-attribute">padding</span>: <span class="hljs-built_in">var</span>(--computed-padding);
+    <span class="hljs-attribute">border</span>: <span class="hljs-built_in">var</span>(--computed-border) solid;
+    <span class="hljs-attribute">width</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-number">100%</span> - (
+        <span class="hljs-built_in">var</span>(--computed-padding) * <span class="hljs-number">2</span> + 
+        <span class="hljs-built_in">var</span>(--computed-border) * <span class="hljs-number">2</span>
+    ));
+}
+</code></pre>
+<h3 id="handling-edge-cases">Handling Edge Cases</h3>
+<p>Managing box sizing in challenging scenarios:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Table Box Model Handling */</span>
+<span class="hljs-selector-class">.table-component</span> {
+    <span class="hljs-comment">/* Reset table-specific box model */</span>
+    <span class="hljs-attribute">border-collapse</span>: separate;
+    <span class="hljs-attribute">border-spacing</span>: <span class="hljs-number">0</span>;
+    
+    <span class="hljs-comment">/* Custom cell sizing */</span>
+    <span class="hljs-selector-tag">td</span> {
+        <span class="hljs-attribute">box-sizing</span>: border-box;
+        <span class="hljs-attribute">padding</span>: <span class="hljs-number">1rem</span>;
+        
+        <span class="hljs-comment">/* Handle overflow content */</span>
+        &amp;<span class="hljs-selector-class">.overflow-cell</span> {
+            <span class="hljs-attribute">max-width</span>: <span class="hljs-number">0</span>;
+            <span class="hljs-attribute">overflow</span>: hidden;
+            <span class="hljs-attribute">text-overflow</span>: ellipsis;
+            <span class="hljs-attribute">white-space</span>: nowrap;
+        }
+    }
+}
+
+<span class="hljs-comment">/* Form Elements */</span>
+<span class="hljs-selector-class">.form-layout</span> {
+    <span class="hljs-comment">/* Consistent input sizing */</span>
+    <span class="hljs-selector-tag">input</span>, select, <span class="hljs-selector-tag">textarea</span> {
+        <span class="hljs-attribute">box-sizing</span>: border-box;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+        <span class="hljs-attribute">padding</span>: <span class="hljs-number">0.75rem</span>;
+        
+        <span class="hljs-comment">/* Handle browser defaults */</span>
+        &amp;<span class="hljs-selector-attr">[type=<span class="hljs-string">&quot;checkbox&quot;</span>]</span>,
+        &amp;<span class="hljs-selector-attr">[type=<span class="hljs-string">&quot;radio&quot;</span>]</span> {
+            <span class="hljs-attribute">width</span>: auto;
+            <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+        }
+    }
+}
+</code></pre>
+<h3 id="testing-and-debug-utilities">Testing and Debug Utilities</h3>
+<p>Tools for debugging box sizing issues:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Debug Mode */</span>
+<span class="hljs-selector-class">.debug-box-model</span> {
+    * {
+        <span class="hljs-attribute">outline</span>: <span class="hljs-number">1px</span> solid <span class="hljs-built_in">rgba</span>(<span class="hljs-number">255</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.2</span>);
+        
+        &amp;<span class="hljs-selector-pseudo">::before</span> {
+            <span class="hljs-attribute">content</span>: <span class="hljs-built_in">attr</span>(class);
+            <span class="hljs-attribute">position</span>: absolute;
+            <span class="hljs-attribute">font-size</span>: <span class="hljs-number">10px</span>;
+            <span class="hljs-attribute">background</span>: black;
+            <span class="hljs-attribute">color</span>: white;
+            <span class="hljs-attribute">padding</span>: <span class="hljs-number">2px</span> <span class="hljs-number">4px</span>;
+            <span class="hljs-attribute">z-index</span>: <span class="hljs-number">1000</span>;
+        }
+    }
+}
+
+<span class="hljs-comment">/* Box Model Visualization */</span>
+<span class="hljs-selector-class">.show-box-model</span> {
+    <span class="hljs-attribute">position</span>: relative;
+    
+    &amp;<span class="hljs-selector-pseudo">::after</span> {
+        <span class="hljs-attribute">content</span>: <span class="hljs-string">&#x27;&#x27;</span>;
+        <span class="hljs-attribute">position</span>: absolute;
+        inset: <span class="hljs-number">0</span>;
+        <span class="hljs-attribute">outline</span>: <span class="hljs-number">1px</span> solid blue;
+        <span class="hljs-attribute">pointer-events</span>: none;
+        <span class="hljs-attribute">z-index</span>: <span class="hljs-number">1000</span>;
+    }
+}
+</code></pre>
+<h1 id="advanced-layout-algorithms-and-box-sizing">Advanced Layout Algorithms and Box Sizing</h1>
+<h2 id="understanding-modern-layout-algorithms">Understanding Modern Layout Algorithms</h2>
+<p>Modern web development employs several sophisticated layout algorithms that each interact with box sizing in unique ways. Let's explore how these algorithms work and how they influence our box model calculations.</p>
+<h3 id="the-block-formatting-context-bfc-algorithm">The Block Formatting Context (BFC) Algorithm</h3>
+<p>The Block Formatting Context is fundamental to understanding how elements are laid out. Here's how it interacts with box sizing:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.bfc-container</span> {
+    <span class="hljs-comment">/* Create a new BFC */</span>
+    <span class="hljs-attribute">display</span>: flow-root;
+    
+    <span class="hljs-comment">/* Complex margin calculations */</span>
+    <span class="hljs-attr">--container-margin</span>: <span class="hljs-number">2rem</span>;
+    <span class="hljs-attr">--child-margin</span>: <span class="hljs-number">1rem</span>;
+    
+    <span class="hljs-comment">/* Handle margin collapse prevention */</span>
+    <span class="hljs-attribute">padding-top</span>: <span class="hljs-number">0.1px</span>; <span class="hljs-comment">/* Prevent margin collapse */</span>
+    <span class="hljs-attribute">margin-top</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--container-margin) - <span class="hljs-built_in">var</span>(--child-margin));
+    
+    <span class="hljs-selector-class">.child-element</span> {
+        <span class="hljs-attribute">box-sizing</span>: border-box;
+        <span class="hljs-attribute">margin</span>: <span class="hljs-built_in">var</span>(--child-margin);
+        
+        <span class="hljs-comment">/* Handle percentage-based margins in BFC */</span>
+        <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">10%</span>; <span class="hljs-comment">/* Relative to BFC width */</span>
+        <span class="hljs-attribute">width</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-number">100%</span> - <span class="hljs-number">20%</span>); <span class="hljs-comment">/* Compensate for horizontal margins */</span>
+    }
+}
+
+<span class="hljs-comment">/* Advanced BFC interactions */</span>
+<span class="hljs-selector-class">.complex-bfc</span> {
+    <span class="hljs-comment">/* Create BFC with custom properties */</span>
+    <span class="hljs-attribute">display</span>: flow-root;
+    container-type: inline-size;
+    
+    <span class="hljs-comment">/* Handle floating elements */</span>
+    <span class="hljs-selector-class">.float-container</span> {
+        <span class="hljs-attribute">float</span>: left;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">50%</span>;
+        
+        <span class="hljs-comment">/* Adjust box sizing for float context */</span>
+        <span class="hljs-attribute">box-sizing</span>: content-box;
+        <span class="hljs-attribute">padding</span>: <span class="hljs-number">1rem</span>;
+        
+        <span class="hljs-comment">/* Clear float context */</span>
+        &amp;<span class="hljs-selector-pseudo">::after</span> {
+            <span class="hljs-attribute">content</span>: <span class="hljs-string">&#x27;&#x27;</span>;
+            <span class="hljs-attribute">display</span>: table;
+            <span class="hljs-attribute">clear</span>: both;
+        }
+    }
+}
+</code></pre>
+<h3 id="css-grids-intrinsic-sizing-algorithm">CSS Grid's Intrinsic Sizing Algorithm</h3>
+<p>Grid layout introduces complex sizing behaviors that require careful box model consideration:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.grid-layout</span> {
+    <span class="hljs-attribute">display</span>: grid;
+    
+    <span class="hljs-comment">/* Advanced track sizing */</span>
+    <span class="hljs-attribute">grid-template-columns</span>: 
+        <span class="hljs-built_in">minmax</span>(<span class="hljs-number">100px</span>, auto)
+        <span class="hljs-built_in">min</span>(<span class="hljs-number">50%</span>, <span class="hljs-number">300px</span>)
+        <span class="hljs-built_in">fit-content</span>(<span class="hljs-number">300px</span>);
+    
+    <span class="hljs-comment">/* Handle grid item sizing */</span>
+    <span class="hljs-selector-class">.grid-item</span> {
+        <span class="hljs-comment">/* Box sizing considerations for grid items */</span>
+        <span class="hljs-attribute">box-sizing</span>: border-box;
+        <span class="hljs-attribute">padding</span>: <span class="hljs-built_in">clamp</span>(<span class="hljs-number">1rem</span>, <span class="hljs-number">3vw</span>, <span class="hljs-number">2rem</span>);
+        
+        <span class="hljs-comment">/* Handle overflow in grid cells */</span>
+        <span class="hljs-attribute">min-width</span>: <span class="hljs-number">0</span>; <span class="hljs-comment">/* Allow text truncation */</span>
+        <span class="hljs-attribute">overflow</span>: hidden;
+        
+        <span class="hljs-comment">/* Complex sizing within grid */</span>
+        &amp;<span class="hljs-selector-class">.spanning-item</span> {
+            <span class="hljs-attribute">grid-column</span>: <span class="hljs-number">1</span> / -<span class="hljs-number">1</span>;
+            <span class="hljs-comment">/* Calculate size considering grid gaps */</span>
+            <span class="hljs-attribute">width</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-number">100%</span> + <span class="hljs-built_in">var</span>(--grid-gap));
+            <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--grid-gap) / -<span class="hljs-number">2</span>);
+        }
+    }
+    
+    <span class="hljs-comment">/* Subgrid handling */</span>
+    <span class="hljs-selector-class">.subgrid-container</span> {
+        <span class="hljs-attribute">grid-column</span>: <span class="hljs-number">1</span> / -<span class="hljs-number">1</span>;
+        <span class="hljs-attribute">display</span>: grid;
+        <span class="hljs-attribute">grid-template-columns</span>: subgrid;
+        
+        <span class="hljs-comment">/* Maintain padding alignment */</span>
+        <span class="hljs-attribute">padding</span>: inherit;
+        <span class="hljs-attribute">margin</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--padding) * -<span class="hljs-number">1</span>);
+    }
+}
+</code></pre>
+<h3 id="flexboxs-growth-and-shrink-algorithms">Flexbox's Growth and Shrink Algorithms</h3>
+<p>Flexbox's sizing algorithm is particularly complex when dealing with flex-basis and box sizing:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.flex-algorithm</span> {
+    <span class="hljs-attribute">display</span>: flex;
+    
+    <span class="hljs-comment">/* Advanced flex calculations */</span>
+    <span class="hljs-selector-class">.flex-item</span> {
+        <span class="hljs-attr">--base-size</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attr">--growth-factor</span>: <span class="hljs-number">2</span>;
+        <span class="hljs-attr">--shrink-factor</span>: <span class="hljs-number">1</span>;
+        
+        <span class="hljs-attribute">flex</span>: <span class="hljs-built_in">var</span>(--growth-factor) <span class="hljs-built_in">var</span>(--shrink-factor) <span class="hljs-built_in">var</span>(--base-size);
+        <span class="hljs-attribute">box-sizing</span>: border-box;
+        <span class="hljs-attribute">padding</span>: <span class="hljs-number">1rem</span>;
+        
+        <span class="hljs-comment">/* Handle minimum content size */</span>
+        <span class="hljs-attribute">min-width</span>: min-content;
+        
+        <span class="hljs-comment">/* Complex flex basis calculations */</span>
+        &amp;<span class="hljs-selector-class">.dynamic-basis</span> {
+            <span class="hljs-attr">--content-width</span>: <span class="hljs-built_in">clamp</span>(<span class="hljs-number">100px</span>, <span class="hljs-number">30%</span>, <span class="hljs-number">300px</span>);
+            <span class="hljs-attribute">flex-basis</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--content-width) - <span class="hljs-built_in">var</span>(--padding) * <span class="hljs-number">2</span>);
+            
+            <span class="hljs-comment">/* Adjust for border-box sizing */</span>
+            <span class="hljs-attribute">padding</span>: <span class="hljs-built_in">var</span>(--padding);
+            <span class="hljs-attribute">border</span>: <span class="hljs-built_in">var</span>(--border-width) solid;
+        }
+    }
+}
+</code></pre>
+<h3 id="container-queries-and-size-containment">Container Queries and Size Containment</h3>
+<p>Modern containment algorithms introduce new complexity to box sizing:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.container-queries</span> {
+    <span class="hljs-comment">/* Set up containment context */</span>
+    container-type: inline-size;
+    container-name: responsive-section;
+    
+    <span class="hljs-comment">/* Handle sizing in container context */</span>
+    <span class="hljs-selector-class">.contained-element</span> {
+        <span class="hljs-attribute">box-sizing</span>: border-box;
+        
+        <span class="hljs-comment">/* Responsive to container size */</span>
+        <span class="hljs-keyword">@container</span> responsive-section (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">400px</span>) {
+            <span class="hljs-attr">--padding-scale</span>: <span class="hljs-number">1.5</span>;
+            <span class="hljs-attribute">padding</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--base-padding) * <span class="hljs-built_in">var</span>(--padding-scale));
+            
+            <span class="hljs-comment">/* Adjust sizing for new padding */</span>
+            <span class="hljs-attribute">width</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-number">100%</span> - <span class="hljs-built_in">var</span>(--padding-scale) * <span class="hljs-built_in">var</span>(--base-padding) * <span class="hljs-number">2</span>);
+        }
+    }
+    
+    <span class="hljs-comment">/* Size containment optimization */</span>
+    <span class="hljs-attribute">contain</span>: size layout style;
+    
+    <span class="hljs-comment">/* Handle descendant sizing */</span>
+    <span class="hljs-selector-class">.size-contained</span> {
+        <span class="hljs-comment">/* Prevent layout shifts */</span>
+        <span class="hljs-attribute">contain</span>-intrinsic-size: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">content-visibility</span>: auto;
+    }
+}
+</code></pre>
+<h3 id="masonry-layout-algorithm">Masonry Layout Algorithm</h3>
+<p>Implementing a masonry layout with proper box sizing:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.masonry-layout</span> {
+    <span class="hljs-comment">/* Modern masonry using grid */</span>
+    <span class="hljs-attribute">display</span>: grid;
+    <span class="hljs-attribute">grid-template-columns</span>: <span class="hljs-built_in">repeat</span>(auto-fill, <span class="hljs-built_in">minmax</span>(<span class="hljs-number">200px</span>, <span class="hljs-number">1</span>fr));
+    <span class="hljs-attribute">grid-template-rows</span>: masonry; <span class="hljs-comment">/* Experimental */</span>
+    
+    <span class="hljs-comment">/* Fallback for non-supporting browsers */</span>
+    <span class="hljs-keyword">@supports</span> <span class="hljs-keyword">not</span> (<span class="hljs-attribute">grid-template-rows</span>: masonry) {
+        <span class="hljs-attribute">column-count</span>: auto;
+        <span class="hljs-attribute">column-width</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">column-gap</span>: <span class="hljs-built_in">var</span>(--gap);
+        
+        <span class="hljs-selector-class">.masonry-item</span> {
+            <span class="hljs-attribute">break-inside</span>: avoid;
+            <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-built_in">var</span>(--gap);
+            
+            <span class="hljs-comment">/* Handle box sizing in column layout */</span>
+            <span class="hljs-attribute">box-sizing</span>: border-box;
+            <span class="hljs-attribute">padding</span>: <span class="hljs-number">1rem</span>;
+            
+            <span class="hljs-comment">/* Prevent overflow issues */</span>
+            <span class="hljs-attribute">overflow</span>: hidden;
+        }
+    }
+}
+</code></pre>
+<h3 id="aspect-ratio-calculator">Aspect Ratio Calculator</h3>
+<p>Handling aspect ratios with modern box sizing:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.aspect-ratio-container</span> {
+    <span class="hljs-comment">/* Modern aspect-ratio property */</span>
+    aspect-ratio: <span class="hljs-number">16</span>/<span class="hljs-number">9</span>;
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+    
+    <span class="hljs-comment">/* Handle content sizing */</span>
+    <span class="hljs-selector-class">.ratio-content</span> {
+        <span class="hljs-attribute">box-sizing</span>: border-box;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
+        <span class="hljs-attribute">padding</span>: <span class="hljs-number">1rem</span>;
+        
+        <span class="hljs-comment">/* Maintain aspect ratio with padding */</span>
+        &amp;<span class="hljs-selector-class">.legacy-support</span> {
+            <span class="hljs-attribute">position</span>: relative;
+            <span class="hljs-attribute">padding-top</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-number">9</span> / <span class="hljs-number">16</span> * <span class="hljs-number">100%</span>);
+            
+            &gt; * {
+                <span class="hljs-attribute">position</span>: absolute;
+                <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+                <span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;
+                <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+                <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
+            }
+        }
+    }
+}
+</code></pre>
+<h3 id="content-based-sizing-algorithm">Content-Based Sizing Algorithm</h3>
+<p>Handling content-driven layouts:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.content-driven</span> {
+    <span class="hljs-comment">/* Intrinsic sizing */</span>
+    <span class="hljs-attribute">width</span>: fit-content;
+    <span class="hljs-attribute">min-width</span>: min-content;
+    <span class="hljs-attribute">max-width</span>: max-content;
+    
+    <span class="hljs-comment">/* Handle box sizing with intrinsic widths */</span>
+    <span class="hljs-selector-class">.content-box</span> {
+        <span class="hljs-attribute">box-sizing</span>: border-box;
+        <span class="hljs-attribute">padding</span>: <span class="hljs-number">1rem</span>;
+        
+        <span class="hljs-comment">/* Complex width calculations */</span>
+        <span class="hljs-attribute">width</span>: <span class="hljs-built_in">clamp</span>(
+            <span class="hljs-built_in">var</span>(--min-content-width),
+            <span class="hljs-built_in">calc</span>(<span class="hljs-number">100vw</span> - <span class="hljs-built_in">var</span>(--padding) * <span class="hljs-number">2</span>),
+            <span class="hljs-built_in">var</span>(--max-content-width)
+        );
+        
+        <span class="hljs-comment">/* Handle overflow */</span>
+        <span class="hljs-attribute">overflow-wrap</span>: break-word;
+        <span class="hljs-attribute">hyphens</span>: auto;
+    }
+}
+</code></pre>
+<h1 id="understanding-css-units-from-pixels-to-dynamic-measurements">Understanding CSS Units: From Pixels to Dynamic Measurements</h1>
+<h2 id="introduction-1">Introduction</h2>
+<p>CSS units are fundamental to creating responsive and maintainable web designs. While beginners often default to pixels, understanding the full spectrum of CSS units and their appropriate use cases is crucial for senior developers. This guide explores absolute units, relative units, and the complex relationships between them in modern web development.</p>
+<h2 id="absolute-units">Absolute Units</h2>
+<p>Absolute units maintain consistent sizes regardless of their context. While they might seem straightforward, their usage requires careful consideration in responsive design.</p>
+<h3 id="pixels-px">Pixels (px)</h3>
+<p>Pixels are the most basic unit in digital design, but they're not as simple as they appear. A CSS pixel (px) is not necessarily equal to a physical device pixel. Instead, it's an abstract unit that renders consistently across devices through a concept called &quot;reference pixel.&quot;</p>
+<p>Key considerations:</p>
+<ul>
+<li>1 CSS pixel = 1/96th of an inch (at normal viewing distance)</li>
+<li>Maintains consistent size across devices due to pixel density adjustments</li>
+<li>Best used for: borders, shadows, and small decorative elements</li>
+<li>Avoid for: font sizes and responsive layouts</li>
+</ul>
+<h3 id="physical-units">Physical Units</h3>
+<p>These units relate to physical measurements but are rarely used in web development:</p>
+<ul>
+<li>Inches (in)</li>
+<li>Centimeters (cm)</li>
+<li>Millimeters (mm)</li>
+<li>Points (pt)</li>
+<li>Picas (pc)</li>
+</ul>
+<h2 id="relative-units">Relative Units</h2>
+<p>Relative units are the backbone of responsive design, scaling based on their context. Understanding their relationships and calculation methods is crucial for senior developers.</p>
+<h3 id="font-relative-units">Font-Relative Units</h3>
+<h4 id="em-units-em">Em Units (em)</h4>
+<p>The 'em' unit is relative to the font size of the element:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.parent</span> {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">1em</span>;    <span class="hljs-comment">/* = 16px */</span>
+}
+<span class="hljs-selector-class">.child</span> {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">2em</span>;  <span class="hljs-comment">/* = 32px (relative to parent) */</span>
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">1em</span>;    <span class="hljs-comment">/* = 32px (relative to itself) */</span>
+}
+</code></pre>
+<p>Key behaviors:</p>
+<ul>
+<li>Compounds when nested (can lead to unexpected results)</li>
+<li>Different behavior for font-size vs. other properties</li>
+<li>Font-size: relative to parent's font size</li>
+<li>Other properties: relative to element's own font size</li>
+</ul>
+<h4 id="root-em-units-rem">Root Em Units (rem)</h4>
+<p>'rem' units are always relative to the root element (html):</p>
+<pre><code class="language-css"><span class="hljs-selector-pseudo">:root</span> {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
+}
+<span class="hljs-selector-class">.element</span> {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.5rem</span>;  <span class="hljs-comment">/* = 24px */</span>
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">2rem</span>;       <span class="hljs-comment">/* = 32px */</span>
+}
+</code></pre>
+<p>You can use <code>em</code> unit for padding and border-radius to automatically scale the size of the padding and border-radius when the font-size of the element changes.</p>
+<p>Benefits:</p>
+<ul>
+<li>Predictable scaling</li>
+<li>Easier maintenance</li>
+<li>No compounding issues</li>
+<li>Ideal for typography systems</li>
+</ul>
+<h3 id="viewport-relative-units">Viewport-Relative Units</h3>
+<p>These units are essential for modern responsive design:</p>
+<h4 id="viewport-width-vw-and-height-vh">Viewport Width (vw) and Height (vh)</h4>
+<pre><code class="language-css"><span class="hljs-selector-class">.hero</span> {
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">100vh</span>;  <span class="hljs-comment">/* Full viewport height */</span>
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">50vw</span>;   <span class="hljs-comment">/* Half viewport width */</span>
+}
+</code></pre>
+<h4 id="dynamic-viewport-units">Dynamic Viewport Units</h4>
+<p>Modern CSS introduces new viewport units for handling mobile browser interfaces:</p>
+<ul>
+<li>dvh (Dynamic Viewport Height)</li>
+<li>svh (Small Viewport Height)</li>
+<li>lvh (Large Viewport Height)</li>
+</ul>
+<pre><code class="language-css"><span class="hljs-selector-class">.mobile-friendly</span> {
+    <span class="hljs-attribute">min-height</span>: <span class="hljs-number">100s</span>vh; <span class="hljs-comment">/* Accounts for mobile browser UI */</span>
+    <span class="hljs-attribute">max-height</span>: <span class="hljs-number">100</span>dvh; <span class="hljs-comment">/* Adjusts dynamically */</span>
+}
+</code></pre>
+<h3 id="line-height-units">Line height units</h3>
+<p><code>lh</code> and <code>rlh</code> are relative lengths units similar to <code>em</code> and <code>rem</code>. The difference between <code>lh</code> and <code>rlh</code> is that the first one is relative to the line height of the element itself, while the second one is relative to the line height of the root element, usually <code>&lt;html&gt;</code>.</p>
+<p>Using these units, we can precisely align box decoration to the text. In this example, we use <code>lh</code> unit to create notepad-like lines using <code>repeating-linear-gradient()</code>. It doesn't matter what's the line height of the text, the lines will always start in the right place.</p>
+<pre><code class="language-css"><span class="hljs-selector-tag">p</span> {
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">repeating-linear-gradient</span>(
+    to top,
+    lightskyblue <span class="hljs-number">0</span> <span class="hljs-number">2px</span>,
+    transparent <span class="hljs-number">2px</span> <span class="hljs-number">1</span>lh
+  );
+}
+</code></pre>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;line-height: 2em&quot;</span>&gt;</span>
+  Summer is a time for adventure, and this year was no exception. I had many
+  exciting experiences, but two of my favorites were my trip to the beach and my
+  week at summer camp.
+<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;line-height: 4em&quot;</span>&gt;</span>
+  At the beach, I spent my days swimming, collecting shells, and building
+  sandcastles. I also went on a boat ride and saw dolphins swimming alongside
+  us.
+<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+</code></pre>
+<p>###Percentages
+In a lot of cases, a percentage is treated in the same way as a length. The thing with percentages is that they are always set relative to some other value. For example, if you set an element's <code>font-size</code> as a percentage, it will be a percentage of the <code>font-size</code> of the element's parent. If you use a percentage for a <code>width</code> value, it will be a percentage of the <code>width</code> of the parent.</p>
+<p>In the below example the two percentage-sized boxes and the two pixel-sized boxes have the same class names. The sets are 40% and 200px wide respectively.</p>
+<p>The difference is that the second set of two boxes is inside a wrapper that is 400 pixels wide. The second 200px wide box is the same width as the first one, but the second 40% box is now 40% of 400px — a lot narrower than the first one!</p>
+<p>Try changing the width of the wrapper or the percentage value to see how this works:</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box px&quot;</span>&gt;</span>I am 200px wide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box percent&quot;</span>&gt;</span>I am 40% wide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;wrapper&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box px&quot;</span>&gt;</span>I am 200px wide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box percent&quot;</span>&gt;</span>I am 40% wide<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<pre><code class="language-css"><span class="hljs-selector-class">.box</span> {
+  <span class="hljs-attribute">background-color</span>: lightblue;
+  <span class="hljs-attribute">border</span>: <span class="hljs-number">5px</span> solid darkblue;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">1em</span> <span class="hljs-number">0</span>;
+}
+<span class="hljs-selector-class">.wrapper</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">400px</span>;
+  <span class="hljs-attribute">border</span>: <span class="hljs-number">5px</span> solid rebeccapurple;
+}
+
+<span class="hljs-selector-class">.px</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">200px</span>;
+}
+
+<span class="hljs-selector-class">.percent</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">40%</span>;
+}
+</code></pre>
+<p>The next example has font sizes set in percentages. Each <code>&lt;li&gt;</code> has a <code>font-size</code> of <code>80%</code>; therefore, the nested list items become progressively smaller as they inherit their sizing from their parent.</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>One<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Two<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+    Three
+    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Three A<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
+        Three B
+        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Three B 2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+</code></pre>
+<pre><code class="language-css"><span class="hljs-selector-tag">li</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">80%</span>;
+}
+</code></pre>
+<p>Note that, while many value types accept a length or a percentage, there are some that only accept length. You can see which values are accepted on the MDN property reference pages. If the allowed value includes <code>&lt;length-percentage&gt;</code> then you can use a length or a percentage. If the allowed value only includes <code>&lt;length&gt;</code>, it is not possible to use a percentage.</p>
+<h3 id="container-query-units">Container Query Units</h3>
+<p>The newest addition to CSS units, enabling component-based responsive design:</p>
+<pre><code class="language-css"><span class="hljs-keyword">@container</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">400px</span>) {
+    <span class="hljs-selector-class">.element</span> {
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">50</span>cqi;  <span class="hljs-comment">/* 50% of the container inline size */</span>
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">30</span>cqb; <span class="hljs-comment">/* 30% of the container block size */</span>
+    }
+}
+</code></pre>
+<h2 id="custom-properties-and-calculated-values">Custom Properties and Calculated Values</h2>
+<p>Senior developers should understand how to combine units with CSS calculations:</p>
+<pre><code class="language-css"><span class="hljs-selector-pseudo">:root</span> {
+    <span class="hljs-attr">--base-size</span>: <span class="hljs-number">1rem</span>;
+    <span class="hljs-attr">--scale-factor</span>: <span class="hljs-number">1.2</span>;
+}
+
+<span class="hljs-selector-class">.responsive-element</span> {
+    <span class="hljs-comment">/* Complex calculation combining different units */</span>
+    <span class="hljs-attribute">padding</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--base-size) + <span class="hljs-number">2vw</span>);
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--base-size) * <span class="hljs-built_in">var</span>(--scale-factor));
+    <span class="hljs-attribute">width</span>: <span class="hljs-built_in">min</span>(<span class="hljs-number">90%</span>, <span class="hljs-number">1200px</span>);
+}
+</code></pre>
+<h2 id="best-practices-for-unit-selection">Best Practices for Unit Selection</h2>
+<h3 id="document-level-considerations">Document-Level Considerations</h3>
+<ol>
+<li>Set root font size in px or percentage</li>
+<li>Use rem for component sizing and spacing</li>
+<li>Employ custom properties for consistent scaling</li>
+</ol>
+<h3 id="component-level-considerations">Component-Level Considerations</h3>
+<ol>
+<li>Use em for component-internal spacing</li>
+<li>Apply viewport units for full-screen layouts</li>
+<li>Implement container queries for portable components</li>
+</ol>
+<h3 id="performance-impact">Performance Impact</h3>
+<p>Different units can affect performance:</p>
+<ul>
+<li>Transform: prefer percentage over calc()</li>
+<li>Avoid mixing units unnecessarily</li>
+<li>Use GPU-accelerated properties when possible</li>
+</ul>
+<h2 id="common-pitfalls-and-solutions">Common Pitfalls and Solutions</h2>
+<h3 id="the-mobile-browser-viewport-issue">The Mobile Browser Viewport Issue</h3>
+<p>Mobile browsers handle viewport units differently due to dynamic toolbars:</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.full-height</span> {
+    <span class="hljs-comment">/* Fallback for older browsers */</span>
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">100vh</span>;
+    <span class="hljs-comment">/* Modern approach */</span>
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">100</span>dvh;
+}
+</code></pre>
+<h3 id="the-nested-em-problem">The Nested em Problem</h3>
+<p>Avoid deep nesting with em units:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Problematic */</span>
+<span class="hljs-selector-class">.nested</span> {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.2em</span>;
+    <span class="hljs-selector-class">.deeper</span> {
+        <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.2em</span>; <span class="hljs-comment">/* Compounds! */</span>
+    }
+}
+
+<span class="hljs-comment">/* Better approach */</span>
+<span class="hljs-selector-class">.nested</span> {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.2rem</span>;
+    <span class="hljs-selector-class">.deeper</span> {
+        <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.2rem</span>; <span class="hljs-comment">/* Consistent */</span>
+    }
+}
+</code></pre>
+<h2 id="unit-selection-framework">Unit Selection Framework</h2>
+<p>When choosing units, consider these factors:</p>
+<ol>
+<li>Context: Is the measurement relative to its container, viewport, or absolute?</li>
+<li>Scalability: Does it need to scale with user preferences?</li>
+<li>Maintainability: How will this affect future modifications?</li>
+<li>Browser support: Are there fallback requirements?</li>
+</ol>
+<h2 id="future-considerations">Future Considerations</h2>
+<p>Stay informed about upcoming developments:</p>
+<ul>
+<li>Container query units expansion</li>
+<li>New viewport units proposals</li>
+<li>Resolution-based units</li>
+<li>Relative color units</li>
+</ul>
+<blockquote>
+<p>💡 <strong>Best Practices Tips:</strong></p>
+<ul>
+<li>Remember that unit selection significantly impacts accessibility, maintainability, and responsive behavior. The key to mastery is understanding not just how units work, but when to use each type for optimal results.</li>
+<li>Use viewport units for full-screen layouts and container queries for component-based responsive design.</li>
+<li>Employ custom properties for consistent scaling and calculated values for complex calculations.</li>
+<li>Choose units based on context, scalability, maintainability, and browser support.</li>
+<li>Stay informed about upcoming developments in CSS units and consider adopting them as they become more widely supported.</li>
+</ul>
+</blockquote>
+<h1 id="css-reset-and-default-styles-building-a-solid-foundation">CSS Reset and Default Styles: Building a Solid Foundation</h1>
+<h2 id="introduction-2">Introduction</h2>
+<p>Understanding CSS resets and default styles is crucial for maintaining consistent cross-browser experiences and establishing reliable styling foundations. This guide explores modern approaches to CSS resets, browser defaults, and creating maintainable component-level default styles.</p>
+<h2 id="understanding-browser-defaults">Understanding Browser Defaults</h2>
+<p>Before diving into resets, let's understand why browsers have default styles. User Agent Stylesheets serve several purposes:</p>
+<ol>
+<li>Providing basic readability without custom CSS</li>
+<li>Maintaining backward compatibility</li>
+<li>Ensuring accessibility for unstyled content</li>
+</ol>
+<p>Example of default margins in different browsers:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Chrome/Safari */</span>
+<span class="hljs-selector-tag">h1</span> { <span class="hljs-attribute">margin</span>: <span class="hljs-number">0.67em</span> <span class="hljs-number">0</span>; }
+
+<span class="hljs-comment">/* Firefox */</span>
+<span class="hljs-selector-tag">h1</span> { <span class="hljs-attribute">margin</span>: <span class="hljs-number">0.67em</span> <span class="hljs-number">0</span>; }
+
+<span class="hljs-comment">/* But subtle differences exist in other elements */</span>
+<span class="hljs-selector-tag">figure</span> {
+    <span class="hljs-comment">/* Firefox */</span>
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">40px</span>;
+    
+    <span class="hljs-comment">/* Chrome/Safari */</span>
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">1em</span> <span class="hljs-number">40px</span>;
+}
+</code></pre>
+<h2 id="modern-css-reset-approaches">Modern CSS Reset Approaches</h2>
+<h3 id="1-minimal-reset">1. Minimal Reset</h3>
+<p>A lightweight approach that preserves useful defaults while removing problematic ones:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* modern-reset.css */</span>
+*, *<span class="hljs-selector-pseudo">::before</span>, *<span class="hljs-selector-pseudo">::after</span> {
+    <span class="hljs-attribute">box-sizing</span>: border-box;
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-comment">/* Improve media defaults */</span>
+<span class="hljs-selector-tag">img</span>, picture, <span class="hljs-selector-tag">video</span>, <span class="hljs-selector-tag">canvas</span>, svg {
+    <span class="hljs-attribute">display</span>: block;
+    <span class="hljs-attribute">max-width</span>: <span class="hljs-number">100%</span>;
+}
+
+<span class="hljs-comment">/* Remove built-in form typography styles */</span>
+<span class="hljs-selector-tag">input</span>, <span class="hljs-selector-tag">button</span>, <span class="hljs-selector-tag">textarea</span>, select {
+    <span class="hljs-attribute">font</span>: inherit;
+}
+
+<span class="hljs-comment">/* Avoid text overflows */</span>
+<span class="hljs-selector-tag">p</span>, <span class="hljs-selector-tag">h1</span>, <span class="hljs-selector-tag">h2</span>, <span class="hljs-selector-tag">h3</span>, <span class="hljs-selector-tag">h4</span>, <span class="hljs-selector-tag">h5</span>, <span class="hljs-selector-tag">h6</span> {
+    <span class="hljs-attribute">overflow-wrap</span>: break-word;
+}
+
+<span class="hljs-comment">/* Create a root stacking context */</span>
+<span class="hljs-selector-id">#root</span>, <span class="hljs-selector-id">#__next</span> {
+    <span class="hljs-attribute">isolation</span>: isolate;
+}
+</code></pre>
+<h3 id="2-normalized-approach">2. Normalized Approach</h3>
+<p>Instead of removing all defaults, normalize them across browsers:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* modern-normalize.css */</span>
+<span class="hljs-selector-pseudo">:where</span>(<span class="hljs-selector-tag">html</span>) {
+    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.15</span>;
+    text-size-adjust: <span class="hljs-number">100%</span>;
+}
+
+<span class="hljs-selector-pseudo">:where</span>(<span class="hljs-selector-tag">body</span>) {
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+    <span class="hljs-attribute">min-height</span>: <span class="hljs-number">100vh</span>;
+    scroll-behavior: smooth;
+    <span class="hljs-attribute">text-rendering</span>: optimizeSpeed;
+}
+
+<span class="hljs-selector-pseudo">:where</span>(<span class="hljs-selector-tag">h1</span>) {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">2em</span>;
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0.67em</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-comment">/* Improve consistency of default fonts */</span>
+<span class="hljs-selector-pseudo">:where</span>(<span class="hljs-selector-tag">code</span>, <span class="hljs-selector-tag">kbd</span>, <span class="hljs-selector-tag">samp</span>, pre) {
+    <span class="hljs-attribute">font-family</span>: ui-monospace, 
+                 SFMono-Regular, 
+                 Consolas, 
+                 <span class="hljs-string">&#x27;Liberation Mono&#x27;</span>, 
+                 Menlo, 
+                 monospace;
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1em</span>;
+}
+</code></pre>
+<h2 id="component-level-defaults">Component-Level Defaults</h2>
+<p>Modern web development requires thinking beyond page-level resets. Here's how to establish robust component defaults:</p>
+<h3 id="1-custom-property-foundations">1. Custom Property Foundations</h3>
+<pre><code class="language-css"><span class="hljs-comment">/* Define system-wide custom properties */</span>
+<span class="hljs-selector-pseudo">:root</span> {
+    <span class="hljs-comment">/* Typography */</span>
+    <span class="hljs-attr">--font-system</span>: system-ui, -apple-system, BlinkMacSystemFont, 
+                   <span class="hljs-string">&#x27;Segoe UI&#x27;</span>, Roboto, Oxygen, Ubuntu, Cantarell, 
+                   <span class="hljs-string">&#x27;Open Sans&#x27;</span>, <span class="hljs-string">&#x27;Helvetica Neue&#x27;</span>, sans-serif;
+    <span class="hljs-attr">--font-mono</span>: ui-monospace, SFMono-Regular, Menlo, Monaco, 
+                 Consolas, Liberation Mono, Courier New, monospace;
+    
+    <span class="hljs-comment">/* Spacing */</span>
+    <span class="hljs-attr">--space-unit</span>: <span class="hljs-number">0.25rem</span>;
+    <span class="hljs-attr">--space-1</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--space-unit) * <span class="hljs-number">1</span>);  <span class="hljs-comment">/* 0.25rem */</span>
+    <span class="hljs-attr">--space-2</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--space-unit) * <span class="hljs-number">2</span>);  <span class="hljs-comment">/* 0.5rem */</span>
+    <span class="hljs-attr">--space-4</span>: <span class="hljs-built_in">calc</span>(<span class="hljs-built_in">var</span>(--space-unit) * <span class="hljs-number">4</span>);  <span class="hljs-comment">/* 1rem */</span>
+    
+    <span class="hljs-comment">/* Colors */</span>
+    <span class="hljs-attr">--color-text</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">0</span> <span class="hljs-number">0%</span> <span class="hljs-number">10%</span>);
+    <span class="hljs-attr">--color-background</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">0</span> <span class="hljs-number">0%</span> <span class="hljs-number">100%</span>);
+    <span class="hljs-attr">--color-primary</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">210</span> <span class="hljs-number">100%</span> <span class="hljs-number">50%</span>);
+    
+    <span class="hljs-comment">/* Motion */</span>
+    <span class="hljs-attr">--transition-fast</span>: <span class="hljs-number">150ms</span> ease;
+    <span class="hljs-attr">--transition-normal</span>: <span class="hljs-number">300ms</span> ease;
+}
+</code></pre>
+<h3 id="2-component-base-styles">2. Component Base Styles</h3>
+<pre><code class="language-css"><span class="hljs-comment">/* Base component styles using custom properties */</span>
+<span class="hljs-selector-class">.component-base</span> {
+    <span class="hljs-attribute">font-family</span>: <span class="hljs-built_in">var</span>(--font-system);
+    <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--color-text);
+    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.5</span>;
+    <span class="hljs-attribute">transition</span>: all <span class="hljs-built_in">var</span>(--transition-normal);
+}
+
+<span class="hljs-comment">/* Form element defaults */</span>
+<span class="hljs-selector-class">.input-base</span> {
+    appearance: none;
+    <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-built_in">hsl</span>(<span class="hljs-number">0</span> <span class="hljs-number">0%</span> <span class="hljs-number">80%</span>);
+    <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-built_in">var</span>(--space-<span class="hljs-number">2</span>) <span class="hljs-built_in">var</span>(--space-<span class="hljs-number">4</span>);
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+    
+    &amp;<span class="hljs-selector-pseudo">:focus</span> {
+        <span class="hljs-attribute">outline</span>: <span class="hljs-number">2px</span> solid <span class="hljs-built_in">var</span>(--color-primary);
+        <span class="hljs-attribute">outline-offset</span>: <span class="hljs-number">2px</span>;
+    }
+}
+
+<span class="hljs-comment">/* Button defaults */</span>
+<span class="hljs-selector-class">.button-base</span> {
+    <span class="hljs-attribute">display</span>: inline-flex;
+    <span class="hljs-attribute">align-items</span>: center;
+    <span class="hljs-attribute">justify-content</span>: center;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-built_in">var</span>(--space-<span class="hljs-number">2</span>) <span class="hljs-built_in">var</span>(--space-<span class="hljs-number">4</span>);
+    <span class="hljs-attribute">border</span>: none;
+    <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
+    <span class="hljs-attribute">background</span>: <span class="hljs-built_in">var</span>(--color-primary);
+    <span class="hljs-attribute">color</span>: white;
+    <span class="hljs-attribute">cursor</span>: pointer;
+    
+    &amp;<span class="hljs-selector-pseudo">:hover</span> {
+        <span class="hljs-attribute">filter</span>: <span class="hljs-built_in">brightness</span>(<span class="hljs-number">1.1</span>);
+    }
+    
+    &amp;<span class="hljs-selector-pseudo">:active</span> {
+        <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(<span class="hljs-number">1px</span>);
+    }
+}
+</code></pre>
+<h2 id="advanced-reset-techniques">Advanced Reset Techniques</h2>
+<h3 id="1-contextual-resets">1. Contextual Resets</h3>
+<p>Reset styles based on context or component requirements:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Reset within a specific context */</span>
+<span class="hljs-selector-class">.prose</span> {
+    <span class="hljs-comment">/* Reset specific to typography-heavy content */</span>
+    <span class="hljs-selector-tag">h1</span>, <span class="hljs-selector-tag">h2</span>, <span class="hljs-selector-tag">h3</span>, <span class="hljs-selector-tag">h4</span>, <span class="hljs-selector-tag">h5</span>, <span class="hljs-selector-tag">h6</span> {
+        <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+        <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.2</span>;
+        <span class="hljs-attribute">scroll-margin-top</span>: <span class="hljs-number">2ex</span>;
+    }
+    
+    <span class="hljs-comment">/* Balanced spacing for content */</span>
+    &gt; * + * {
+        <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">1.5em</span>;
+    }
+    
+    <span class="hljs-comment">/* List styles preservation */</span>
+    <span class="hljs-selector-tag">ul</span>, <span class="hljs-selector-tag">ol</span> {
+        <span class="hljs-attribute">padding-left</span>: <span class="hljs-number">1.5em</span>;
+        
+        <span class="hljs-selector-tag">li</span> + <span class="hljs-selector-tag">li</span> {
+            <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">0.5em</span>;
+        }
+    }
+}
+</code></pre>
+<h3 id="2-media-query-aware-defaults">2. Media Query Aware Defaults</h3>
+<pre><code class="language-css"><span class="hljs-comment">/* Responsive default adjustments */</span>
+<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">prefers-reduced-motion</span>: reduce) {
+    *, *<span class="hljs-selector-pseudo">::before</span>, *<span class="hljs-selector-pseudo">::after</span> {
+        <span class="hljs-attribute">animation-duration</span>: <span class="hljs-number">0.01ms</span> <span class="hljs-meta">!important</span>;
+        <span class="hljs-attribute">animation-iteration-count</span>: <span class="hljs-number">1</span> <span class="hljs-meta">!important</span>;
+        <span class="hljs-attribute">transition-duration</span>: <span class="hljs-number">0.01ms</span> <span class="hljs-meta">!important</span>;
+        scroll-behavior: auto <span class="hljs-meta">!important</span>;
+    }
+}
+
+<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">hover</span>: <span class="hljs-attribute">hover</span>) {
+    <span class="hljs-selector-class">.button-base</span> {
+        &amp;<span class="hljs-selector-pseudo">:hover</span> {
+            <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(-<span class="hljs-number">1px</span>);
+        }
+    }
+}
+</code></pre>
+<h2 id="css-reset-best-practices">CSS Reset Best Practices</h2>
+<h3 id="1-performance-considerations">1. Performance Considerations</h3>
+<p>Optimize reset implementations:</p>
+<pre><code class="language-css"><span class="hljs-comment">/* Use lower specificity where possible */</span>
+<span class="hljs-selector-pseudo">:where</span>(<span class="hljs-selector-tag">h1</span>) {
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-comment">/* Group related resets */</span>
+<span class="hljs-selector-pseudo">:where</span>(<span class="hljs-selector-tag">img</span>, svg, <span class="hljs-selector-tag">video</span>) {
+    <span class="hljs-attribute">display</span>: block;
+    <span class="hljs-attribute">max-width</span>: <span class="hljs-number">100%</span>;
+    <span class="hljs-attribute">height</span>: auto;
+}
+</code></pre>
+<h3 id="2-accessibility-first-defaults">2. Accessibility-First Defaults</h3>
+<pre><code class="language-css"><span class="hljs-comment">/* Maintain accessibility while resetting */</span>
+<span class="hljs-selector-pseudo">:focus</span>-visible {
+    <span class="hljs-attribute">outline</span>: <span class="hljs-number">2px</span> solid <span class="hljs-built_in">var</span>(--color-primary);
+    <span class="hljs-attribute">outline-offset</span>: <span class="hljs-number">2px</span>;
+}
+
+<span class="hljs-keyword">@media</span> (<span class="hljs-attribute">prefers-color-scheme</span>: dark) {
+    <span class="hljs-selector-pseudo">:root</span> {
+        <span class="hljs-attr">--color-text</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">0</span> <span class="hljs-number">0%</span> <span class="hljs-number">90%</span>);
+        <span class="hljs-attr">--color-background</span>: <span class="hljs-built_in">hsl</span>(<span class="hljs-number">0</span> <span class="hljs-number">0%</span> <span class="hljs-number">10%</span>);
+    }
+}
+</code></pre>
+<h2 id="testing-reset-effectiveness">Testing Reset Effectiveness</h2>
+<p>Develop a testing strategy that includes:</p>
+<ol>
+<li>Cross-browser visual regression testing</li>
+<li>Accessibility testing with screen readers</li>
+<li>Component isolation testing</li>
+<li>Responsive behavior verification</li>
+<li>Print stylesheet verification</li>
+</ol>
+<h2 id="maintenance-and-updates">Maintenance and Updates</h2>
+<p>Keep your reset and defaults current:</p>
+<ol>
+<li>Regular browser default audits</li>
+<li>Component-specific reset reviews</li>
+<li>Performance monitoring</li>
+<li>Accessibility compliance checks</li>
+</ol>
+<p>Remember that resets and defaults are not &quot;set and forget&quot; – they require ongoing maintenance and updates as browsers evolve and new standards emerge.</p>
 
             <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
             
