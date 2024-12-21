@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Figma and UI&sol;UX Design</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-dark">
+            <h1 id="figma-and-uiux-design">Figma and UI/UX Design</h1>
+<h1 id="figma-get-started">Figma: Get started</h1>
+<h2 id="understanding-and-utilizing-user-personas-in-design">Understanding and Utilizing User Personas in Design</h2>
+<h3 id="what-is-a-user-persona">What is a User Persona?</h3>
+<p>A user persona is a semi-fictional representation of your ideal customer or user, created based on market research and real data about your existing customers. Think of it as creating a detailed character profile – like an author would for a novel – but this character represents your target audience. This isn't just any imaginary user; it's a carefully crafted archetype that embodies the goals, behaviors, and pain points of your larger user group.</p>
+<h3 id="why-user-personas-matter">Why User Personas Matter</h3>
+<p>When we design without clear personas, we often fall into two common traps. The first is designing for ourselves, where we unconsciously create solutions based on our own preferences and technical expertise. The second is trying to design for everyone, which typically results in a diluted, generic solution that serves no one particularly well.</p>
+<h3 id="the-power-of-specificity">The Power of Specificity</h3>
+<p>By focusing on specific personas, we actually achieve greater universal appeal within our target market. This might seem counterintuitive, but consider this: When Instagram was first launched, it focused specifically on photography enthusiasts who wanted to share artistic photos. By designing for this specific persona, they created a platform that eventually appealed to a much broader audience while maintaining its core value proposition.</p>
+<h3 id="benefits-of-using-personas-in-design">Benefits of Using Personas in Design</h3>
+<p>Creating and using personas provides several key advantages:</p>
+<ol>
+<li><strong>Focused Decision Making</strong>: When faced with design choices, you can ask &quot;Would Sarah (your persona) understand this?&quot; or &quot;Would this solve Tom's problem?&quot; This makes decision-making more concrete and less abstract.</li>
+<li><strong>Stakeholder Communication</strong>: Personas give you a powerful tool for defending design decisions to stakeholders. Instead of arguing based on personal preferences, you can reference your persona's needs and behaviors.</li>
+<li><strong>Team Alignment</strong>: When everyone on the team understands who they're designing for, it creates consistency across the product and helps align different departments (design, marketing, development) around common user goals.</li>
+<li><strong>Empathy Building</strong>: Personas help team members who aren't in direct contact with users understand and empathize with the end users' needs and frustrations.</li>
+</ol>
+<h3 id="creating-effective-personas">Creating Effective Personas</h3>
+<p>To create useful personas, include:</p>
+<ul>
+<li>Demographic information (age, occupation, location)</li>
+<li>Goals and motivations</li>
+<li>Pain points and frustrations</li>
+<li>Technical proficiency level</li>
+<li>Typical behaviors and preferences</li>
+<li>Quote that captures their attitude</li>
+<li>A day in their life</li>
+<li>Key scenarios where they might use your product</li>
+</ul>
+<h3 id="common-pitfalls-to-avoid">Common Pitfalls to Avoid</h3>
+<p>Remember that personas should be:</p>
+<ul>
+<li>Based on research, not assumptions</li>
+<li>Specific enough to be meaningful but not so specific they limit thinking</li>
+<li>Regularly updated as you learn more about your users</li>
+<li>Used consistently across your design process, not created and forgotten</li>
+</ul>
+<h3 id="implementation-in-design-process">Implementation in Design Process</h3>
+<p>When working on any feature or design element, always start by asking:</p>
+<ol>
+<li>How does this serve our persona's goals?</li>
+<li>Does this align with their technical proficiency?</li>
+<li>Would this fit naturally into their daily routine?</li>
+<li>Does this address their primary pain points?</li>
+</ol>
+<p>The key is to let your personas guide your design decisions while remaining flexible enough to incorporate new insights as they emerge from user research and feedback.</p>
+<p>Remember: Personas are tools for focus, not constraints. They should inspire better design decisions by keeping the team aligned around real user needs rather than limiting creativity or innovation.</p>
+<h1 id="wireframing-in-modern-uiux-design">Wireframing in Modern UI/UX Design</h1>
+<h2 id="understanding-the-wireframing-spectrum">Understanding the Wireframing Spectrum</h2>
+<p>Wireframing exists on a spectrum from low-fidelity (Lo-Fi) to high-fidelity (Hi-Fi), with each approach serving distinct purposes in the design process. Let's explore these in detail.</p>
+<h2 id="low-fidelity-wireframes">Low-Fidelity Wireframes</h2>
+<h3 id="core-characteristics">Core Characteristics</h3>
+<p>Low-fidelity wireframes are the initial visual representations of your user interface, stripped down to their most basic elements. They serve as the skeletal framework of your design, focusing on layout, space allocation, and content prioritization rather than visual design.</p>
+<h3 id="key-components">Key Components</h3>
+<ul>
+<li>Basic shapes and lines representing UI elements</li>
+<li>Placeholder text (often Lorem Ipsum)</li>
+<li>Simple boxes for images</li>
+<li>Rudimentary navigation elements</li>
+<li>Basic content blocks</li>
+</ul>
+<h3 id="strategic-benefits">Strategic Benefits</h3>
+<p>The deliberate simplicity of Lo-Fi wireframes offers several advantages:</p>
+<ol>
+<li>Rapid Iteration: Their basic nature allows for quick modifications, making them ideal for early-stage experimentation.</li>
+<li>Stakeholder Focus: Without visual distractions, stakeholders can concentrate on fundamental layout and functionality decisions.</li>
+<li>Design Flexibility: The abstract nature prevents premature commitment to specific design choices.</li>
+<li>Resource Efficiency: Quick creation and modification save valuable project time and resources.</li>
+</ol>
+<h3 id="best-practices-for-lo-fi-wireframing">Best Practices for Lo-Fi Wireframing</h3>
+<p>When creating low-fidelity wireframes, consider these advanced approaches:</p>
+<ol>
+<li>Information Architecture First: Begin with content hierarchy and user flow before adding any visual elements.</li>
+<li>Consistent Abstraction: Maintain the same level of detail across all elements to prevent focus bias.</li>
+<li>Strategic Annotation: Include clear notes about functionality and interaction patterns.</li>
+<li>Modular Thinking: Design reusable components that can be easily modified across different screens.</li>
+</ol>
+<h2 id="high-fidelity-wireframes">High-Fidelity Wireframes</h2>
+<h3 id="core-characteristics-1">Core Characteristics</h3>
+<p>Hi-Fi wireframes represent a more mature stage in the design process, incorporating specific visual elements while still maintaining focus on functionality and user experience.</p>
+<h3 id="key-components-1">Key Components</h3>
+<ul>
+<li>Accurate typography and font choices</li>
+<li>Specific spacing and alignment</li>
+<li>Actual content (rather than placeholder text)</li>
+<li>Detailed navigation elements</li>
+<li>Interactive components</li>
+<li>Color schemes (though often in grayscale)</li>
+</ul>
+<h3 id="strategic-applications">Strategic Applications</h3>
+<p>Hi-Fi wireframes serve several crucial purposes:</p>
+<ol>
+<li>Detailed Documentation: They provide comprehensive specifications for development teams.</li>
+<li>User Testing: Their increased detail makes them suitable for meaningful usability testing.</li>
+<li>Stakeholder Presentation: They help stakeholders visualize the final product more accurately.</li>
+<li>Design System Integration: They can incorporate elements from existing design systems.</li>
+</ol>
+<h3 id="advanced-hi-fi-wireframing-techniques">Advanced Hi-Fi Wireframing Techniques</h3>
+<ol>
+<li>
+<p>Component-Based Architecture</p>
+<ul>
+<li>Create a library of reusable components</li>
+<li>Establish clear naming conventions</li>
+<li>Document component behavior and states</li>
+<li>Define component relationships and hierarchy</li>
+</ul>
+</li>
+<li>
+<p>Interaction Design Integration</p>
+<ul>
+<li>Document micro-interactions</li>
+<li>Define state changes</li>
+<li>Specify animation timing and behavior</li>
+<li>Include error states and edge cases</li>
+</ul>
+</li>
+<li>
+<p>Responsive Considerations</p>
+<ul>
+<li>Define breakpoint behavior</li>
+<li>Document component adaptation rules</li>
+<li>Specify layout changes across devices</li>
+<li>Include touch target specifications</li>
+</ul>
+</li>
+</ol>
+<h2 id="the-bridge-between-lo-fi-and-hi-fi">The Bridge Between Lo-Fi and Hi-Fi</h2>
+<h3 id="strategic-progression">Strategic Progression</h3>
+<p>Understanding when and how to move from Lo-Fi to Hi-Fi wireframes is crucial:</p>
+<ol>
+<li>Validation Points: Establish clear criteria for progressing from Lo-Fi to Hi-Fi</li>
+<li>Iterative Refinement: Create feedback loops between both fidelity levels</li>
+<li>Documentation Evolution: Maintain clear documentation of design decisions during transition</li>
+<li>Stakeholder Involvement: Define appropriate stakeholder input at each stage</li>
+</ol>
+<h3 id="common-pitfalls-to-avoid-1">Common Pitfalls to Avoid</h3>
+<ol>
+<li>Premature Detail: Adding too much detail too early in the process</li>
+<li>Inconsistent Fidelity: Mixing different fidelity levels without purpose</li>
+<li>Skipping Validation: Moving to Hi-Fi before Lo-Fi concepts are validated</li>
+<li>Over-specification: Including unnecessary detail that constrains development</li>
+</ol>
+<h2 id="tools-and-technologies">Tools and Technologies</h2>
+<h3 id="lo-fi-wireframing-tools">Lo-Fi Wireframing Tools</h3>
+<ul>
+<li>Paper and pencil</li>
+<li>Balsamiq</li>
+<li>Whimsical</li>
+<li>Miro's wireframing features</li>
+</ul>
+<h3 id="hi-fi-wireframing-tools">Hi-Fi Wireframing Tools</h3>
+<ul>
+<li>Figma</li>
+<li>Adobe XD</li>
+<li>Sketch</li>
+<li>Axure RP</li>
+</ul>
+<h3 id="selection-criteria">Selection Criteria</h3>
+<p>When choosing tools, consider:</p>
+<ul>
+<li>Team collaboration needs</li>
+<li>Integration requirements</li>
+<li>Handoff processes</li>
+<li>Learning curve</li>
+<li>Version control capabilities</li>
+</ul>
+<h2 id="measuring-wireframe-effectiveness">Measuring Wireframe Effectiveness</h2>
+<h3 id="quality-metrics">Quality Metrics</h3>
+<ul>
+<li>Clarity of communication</li>
+<li>Consistency across screens</li>
+<li>Component reusability</li>
+<li>Documentation completeness</li>
+<li>Implementation feasibility</li>
+</ul>
+<h3 id="validation-methods">Validation Methods</h3>
+<ul>
+<li>Stakeholder reviews</li>
+<li>Developer feedback</li>
+<li>User testing (especially for Hi-Fi)</li>
+<li>Heuristic evaluation</li>
+<li>Accessibility assessment</li>
+</ul>
+<h2 id="future-considerations">Future Considerations</h2>
+<p>As design tools and methodologies evolve, consider these emerging trends:</p>
+<ol>
+<li>AI-Assisted Wireframing: Understanding the role of AI in generating and validating wireframes</li>
+<li>Design System Integration: Closer integration with design system tools and processes</li>
+<li>Cross-Platform Considerations: Adapting wireframes for emerging platforms and devices</li>
+<li>Collaborative Workflows: Evolution of real-time collaboration in wireframing</li>
+</ol>
+<h1 id="figma-shortcuts">Figma shortcuts</h1>
+<h2 id="sample-1">Sample 1</h2>
+<p><img src="file:///c:\Users\frpc\Desktop\job\docs\image\figma-ui-ux\1734451401056.png" alt="1734451401056"></p>
+<p><img src="file:///c:\Users\frpc\Desktop\job\docs\image\figma-ui-ux\1734451409423.png" alt="1734451409423"></p>
+<h2 id="sample-2">Sample 2</h2>
+<p><img src="file:///c:\Users\frpc\Desktop\job\docs\image\figma-ui-ux\1734451616427.png" alt="1734451616427"></p>
+<h2 id="sample-3">Sample 3</h2>
+<p><img src="file:///c:\Users\frpc\Desktop\job\docs\image\figma-ui-ux\1734453234093.png" alt="1734453234093"></p>
+<h2 id="costume">Costume</h2>
+<p><img src="file:///c:\Users\frpc\Desktop\job\docs\image\figma-ui-ux\1734453280663.png" alt="1734453280663"></p>
+<h1 id="default-properties-and-best-practices-for-figma-components">Default Properties and Best Practices for Figma Components</h1>
+<h2 id="core-principles-for-default-setup">Core Principles for Default Setup</h2>
+<h3 id="base-properties-configuration">Base Properties Configuration</h3>
+<p>When setting up default properties for components in Figma, follow these fundamental principles:</p>
+<ol>
+<li>
+<p><strong>Layout Properties</strong></p>
+<ul>
+<li>Always set Auto-layout as the default for new frames and components</li>
+<li>Configure default padding (16px for containers, 8px for internal spacing)</li>
+<li>Set consistent corner radius values (4px for small elements, 8px for cards)</li>
+<li>Enable constraints relative to parent frame</li>
+</ul>
+</li>
+<li>
+<p><strong>Color System Integration</strong></p>
+<ul>
+<li>Define color styles before creating components</li>
+<li>Set default fill colors using design tokens</li>
+<li>Configure default stroke properties (1px, solid)</li>
+<li>Establish hover and active states using color variables</li>
+</ul>
+</li>
+</ol>
+<h3 id="rectangle-component-best-practices">Rectangle Component Best Practices</h3>
+<ol>
+<li>
+<p><strong>Foundation Settings</strong></p>
+<ul>
+<li>Name convention: <code>rectangle/[purpose]/[variant]</code></li>
+<li>Default corner radius: 4px (adjustable via component properties)</li>
+<li>Enable &quot;Preserve ratio&quot; for icons and logos</li>
+<li>Set default constraints to &quot;Scale&quot; for responsive behavior</li>
+</ul>
+</li>
+<li>
+<p><strong>Advanced Properties</strong></p>
+<ul>
+<li>Configure auto-layout properties for consistent spacing</li>
+<li>Set up component properties for:
+<ul>
+<li>Corner radius variations (0, 4, 8, 12, 16, full)</li>
+<li>Fill styles (solid, gradient, transparent)</li>
+<li>Border options (none, 1px, 2px)</li>
+<li>Shadow variants (none, sm, md, lg)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Interactive States</strong></p>
+<ul>
+<li>Create variant properties for:
+<ul>
+<li>Default state</li>
+<li>Hover state</li>
+<li>Active state</li>
+<li>Disabled state</li>
+</ul>
+</li>
+<li>Use boolean properties for toggle states</li>
+</ul>
+</li>
+</ol>
+<h3 id="frame-component-standards">Frame Component Standards</h3>
+<ol>
+<li>
+<p><strong>Default Configuration</strong></p>
+<ul>
+<li>Auto-layout: Vertical, 16px gap</li>
+<li>Padding: 16px all sides</li>
+<li>Clip content: Enabled</li>
+<li>Background: Transparent</li>
+</ul>
+</li>
+<li>
+<p><strong>Responsive Behavior</strong></p>
+<ul>
+<li>Set horizontal resizing to &quot;Hug contents&quot;</li>
+<li>Configure vertical resizing to &quot;Fixed&quot;</li>
+<li>Enable &quot;Fill container&quot; for full-width scenarios</li>
+</ul>
+</li>
+</ol>
+<h2 id="advanced-component-property-management">Advanced Component Property Management</h2>
+<h3 id="property-inheritance">Property Inheritance</h3>
+<ol>
+<li>
+<p><strong>Base Component Structure</strong></p>
+<pre><code>└── Base Component
+    ├── Variants
+    │   ├── Primary
+    │   ├── Secondary
+    │   └── Tertiary
+    └── States
+        ├── Default
+        ├── Hover
+        └── Active
+</code></pre>
+</li>
+<li>
+<p><strong>Property Propagation</strong></p>
+<ul>
+<li>Set instance swap options</li>
+<li>Configure override protection</li>
+<li>Define property relationships</li>
+<li>Establish component hierarchy</li>
+</ul>
+</li>
+</ol>
+<h3 id="smart-components-setup">Smart Components Setup</h3>
+<ol>
+<li>
+<p><strong>Interactive Properties</strong></p>
+<ul>
+<li>Configure smart animate properties</li>
+<li>Set up prototype connections</li>
+<li>Define interaction variables</li>
+<li>Establish state management rules</li>
+</ul>
+</li>
+<li>
+<p><strong>Advanced Constraints</strong></p>
+<ul>
+<li>Left and right: Scale</li>
+<li>Top and bottom: Center</li>
+<li>Size: Fill container</li>
+<li>Position: Relative to parent</li>
+</ul>
+</li>
+</ol>
+<h2 id="best-practices-for-production">Best Practices for Production</h2>
+<ol>
+<li>
+<p><strong>Component Organization</strong></p>
+<ul>
+<li>Use clear naming conventions</li>
+<li>Group related components</li>
+<li>Maintain component description</li>
+<li>Document component usage</li>
+</ul>
+</li>
+<li>
+<p><strong>Performance Optimization</strong></p>
+<ul>
+<li>Minimize nested instances</li>
+<li>Use boolean properties for toggles</li>
+<li>Optimize variant combinations</li>
+<li>Implement efficient constraints</li>
+</ul>
+</li>
+<li>
+<p><strong>Version Control</strong></p>
+<ul>
+<li>Maintain component changelog</li>
+<li>Use semantic versioning</li>
+<li>Document breaking changes</li>
+<li>Implement deprecation strategy</li>
+</ul>
+</li>
+</ol>
+<h2 id="component-property-checklist">Component Property Checklist</h2>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Default layout properties configured</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Color styles and variables integrated</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Interactive states defined</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Responsive behavior set</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Component properties documented</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Variant structure organized</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Smart animations configured</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Performance optimizations applied</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Version control implemented</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Usage guidelines documented</li>
+</ul>
+<h2 id="common-pitfalls-to-avoid-2">Common Pitfalls to Avoid</h2>
+<ol>
+<li>
+<p><strong>Structure Issues</strong></p>
+<ul>
+<li>Inconsistent naming conventions</li>
+<li>Overcomplicating variant structure</li>
+<li>Neglecting component documentation</li>
+<li>Poor property organization</li>
+</ul>
+</li>
+<li>
+<p><strong>Performance Problems</strong></p>
+<ul>
+<li>Excessive nesting of components</li>
+<li>Overuse of complex constraints</li>
+<li>Unnecessary variant combinations</li>
+<li>Inefficient property inheritance</li>
+</ul>
+</li>
+<li>
+<p><strong>Maintenance Challenges</strong></p>
+<ul>
+<li>Incomplete version control</li>
+<li>Poor documentation</li>
+<li>Inconsistent updates</li>
+<li>Unclear deprecation process</li>
+</ul>
+</li>
+</ol>
+<h1 id="typography-and-color-systems-in-figma">Typography and Color Systems in Figma</h1>
+<h2 id="typography-system-architecture">Typography System Architecture</h2>
+<h3 id="type-scale-foundation">Type Scale Foundation</h3>
+<ol>
+<li>
+<p><strong>Mathematical Scale Configuration</strong></p>
+<pre><code>Base size: 16px
+Scale ratio: 1.250 (Major Third)
+
+Display: 3.052rem (48.83px)
+H1: 2.441rem (39.06px)
+H2: 1.953rem (31.25px)
+H3: 1.563rem (25.00px)
+H4: 1.25rem (20.00px)
+Body: 1rem (16.00px)
+Small: 0.8rem (12.80px)
+XSmall: 0.64rem (10.24px)
+</code></pre>
+<p>also can you <a href="https://typescale.com/">typescale</a> website for creating other standards scale.</p>
+</li>
+<li>
+<p><strong>Advanced Text Properties</strong></p>
+<ul>
+<li>Line height ratios: 1.25 (tight), 1.5 (normal), 1.75 (loose)</li>
+<li>Letter spacing: -0.025em (headings), 0 (body), 0.025em (small)</li>
+<li>Paragraph spacing: 0.75em (default), 1em (relaxed)</li>
+<li>OpenType features configuration</li>
+</ul>
+</li>
+</ol>
+<h3 id="typography-styles-structure">Typography Styles Structure</h3>
+<ol>
+<li>
+<p><strong>Naming Convention</strong></p>
+<pre><code>[category]/[variant]/[weight]-[size]
+
+Examples:
+heading/display/bold-48
+body/paragraph/regular-16
+ui/button/medium-14
+</code></pre>
+</li>
+<li>
+<p><strong>Style Organization</strong></p>
+<pre><code>└── Typography
+    ├── Display
+    │   ├── Regular
+    │   └── Bold
+    ├── Heading
+    │   ├── H1
+    │   ├── H2
+    │   ├── H3
+    │   └── H4
+    ├── Body
+    │   ├── Large
+    │   ├── Regular
+    │   └── Small
+    └── UI
+        ├── Button
+        ├── Caption
+        └── Label
+</code></pre>
+</li>
+</ol>
+<h3 id="responsive-typography">Responsive Typography</h3>
+<ol>
+<li>
+<p><strong>Breakpoint Scale</strong></p>
+<pre><code>Mobile: 16px base
+Tablet: 16px base (1:1)
+Desktop: 18px base (1.125:1)
+Large: 20px base (1.25:1)
+</code></pre>
+</li>
+<li>
+<p><strong>Fluid Typography Implementation</strong></p>
+<pre><code class="language-css"><span class="hljs-comment">/* Example scaling formula */</span>
+<span class="hljs-attribute">font-size</span>: <span class="hljs-built_in">clamp</span>(<span class="hljs-number">1rem</span>, <span class="hljs-number">0.5rem</span> + <span class="hljs-number">1vw</span>, <span class="hljs-number">1.25rem</span>);
+</code></pre>
+</li>
+</ol>
+<h2 id="color-system-architecture">Color System Architecture</h2>
+<h3 id="color-token-hierarchy">Color Token Hierarchy</h3>
+<ol>
+<li>
+<p><strong>Global Color Tokens</strong></p>
+<pre><code>└── Global
+    ├── Primary
+    │   ├── 50: #F0F9FF
+    │   ├── 100: #E0F2FE
+    │   ├── 200: #BAE6FD
+    │   ├── 300: #7DD3FC
+    │   ├── 400: #38BDF8
+    │   ├── 500: #0EA5E9
+    │   ├── 600: #0284C7
+    │   ├── 700: #0369A1
+    │   ├── 800: #075985
+    │   └── 900: #0C4A6E
+    └── Neutral
+        ├── 50: #F8FAFC
+        ├── 100: #F1F5F9
+        ├── 200: #E2E8F0
+        ├── 300: #CBD5E1
+        ├── 400: #94A3B8
+        ├── 500: #64748B
+        ├── 600: #475569
+        ├── 700: #334155
+        ├── 800: #1E293B
+        └── 900: #0F172A
+</code></pre>
+</li>
+<li>
+<p><strong>Semantic Color Tokens</strong></p>
+<pre><code>└── Semantic
+    ├── Background
+    │   ├── Primary
+    │   ├── Secondary
+    │   └── Tertiary
+    ├── Text
+    │   ├── Primary
+    │   ├── Secondary
+    │   └── Disabled
+    ├── Border
+    │   ├── Default
+    │   ├── Hover
+    │   └── Active
+    └── Status
+        ├── Success
+        ├── Warning
+        ├── Error
+        └── Info
+</code></pre>
+</li>
+</ol>
+<h3 id="color-management-best-practices">Color Management Best Practices</h3>
+<ol>
+<li>
+<p><strong>Color Style Organization</strong></p>
+<ul>
+<li>Use consistent naming patterns</li>
+<li>Group colors by purpose</li>
+<li>Maintain color description</li>
+<li>Document usage guidelines</li>
+</ul>
+</li>
+<li>
+<p><strong>Color Variables Implementation</strong></p>
+<pre><code>└── Variables
+    ├── Light Theme
+    │   ├── Background
+    │   ├── Text
+    │   └── Border
+    └── Dark Theme
+        ├── Background
+        ├── Text
+        └── Border
+</code></pre>
+</li>
+</ol>
+<h3 id="advanced-color-applications">Advanced Color Applications</h3>
+<ol>
+<li>
+<p><strong>Gradient System</strong></p>
+<pre><code>└── Gradients
+    ├── Linear
+    │   ├── Primary
+    │   └── Accent
+    ├── Radial
+    │   ├── Subtle
+    │   └── Bold
+    └── Angular
+        ├── Decorative
+        └── Background
+</code></pre>
+</li>
+<li>
+<p><strong>Color Contrast Requirements</strong></p>
+<ul>
+<li>AA Standard: 4.5:1 (text)</li>
+<li>AAA Standard: 7:1 (text)</li>
+<li>Large Text: 3:1 (AA)</li>
+<li>UI Components: 3:1 minimum</li>
+</ul>
+</li>
+</ol>
+<h2 id="implementation-guidelines">Implementation Guidelines</h2>
+<h3 id="typography-integration">Typography Integration</h3>
+<ol>
+<li>
+<p><strong>Component Typography</strong></p>
+<ul>
+<li>Set default text styles</li>
+<li>Configure text properties</li>
+<li>Establish hierarchy rules</li>
+<li>Define responsive behavior</li>
+</ul>
+</li>
+<li>
+<p><strong>Text Style Management</strong></p>
+<ul>
+<li>Create style variants</li>
+<li>Set up text properties</li>
+<li>Configure OpenType features</li>
+<li>Establish style relationships</li>
+</ul>
+</li>
+</ol>
+<h3 id="color-implementation">Color Implementation</h3>
+<ol>
+<li>
+<p><strong>Component Color Usage</strong></p>
+<ul>
+<li>Apply semantic tokens</li>
+<li>Set interactive states</li>
+<li>Configure dark mode</li>
+<li>Handle special states</li>
+</ul>
+</li>
+<li>
+<p><strong>Color Style Management</strong></p>
+<ul>
+<li>Create color variables</li>
+<li>Set up color modes</li>
+<li>Configure color schemes</li>
+<li>Establish color relationships</li>
+</ul>
+</li>
+</ol>
+<h2 id="quality-assurance-checklist">Quality Assurance Checklist</h2>
+<h3 id="typography-verification">Typography Verification</h3>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> All text styles follow naming convention</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Line heights are consistently applied</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Letter spacing is appropriate</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> OpenType features are configured</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Responsive scaling is implemented</li>
+</ul>
+<h3 id="color-system-verification">Color System Verification</h3>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Color tokens are properly organized</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Semantic colors are consistently applied</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Color contrast meets accessibility standards</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Dark mode variations are configured</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Color variables are properly linked</li>
+</ul>
+<h2 id="common-typography--color-pitfalls">Common Typography &amp; Color Pitfalls</h2>
+<ol>
+<li>
+<p><strong>Typography Issues</strong></p>
+<ul>
+<li>Inconsistent scale implementation</li>
+<li>Poor responsive behavior</li>
+<li>Missing text styles</li>
+<li>Incorrect OpenType settings</li>
+</ul>
+</li>
+<li>
+<p><strong>Color System Problems</strong></p>
+<ul>
+<li>Inconsistent token usage</li>
+<li>Poor contrast ratios</li>
+<li>Incomplete dark mode</li>
+<li>Unorganized color styles</li>
+</ul>
+</li>
+<li>
+<p><strong>Management Challenges</strong></p>
+<ul>
+<li>Undefined naming conventions</li>
+<li>Missing documentation</li>
+<li>Inconsistent updates</li>
+<li>Poor version control</li>
+</ul>
+</li>
+</ol>
+<h1 id="frames-and-groups-management">Frames and Groups Management</h1>
+<h2 id="frame-architecture-principles">Frame Architecture Principles</h2>
+<h3 id="frame-hierarchy-system">Frame Hierarchy System</h3>
+<pre><code>└── Page
+    ├── Section Frame
+    │   ├── Component Frame
+    │   │   ├── Element Frame
+    │   │   └── Element Frame
+    │   └── Component Frame
+    └── Section Frame
+        └── Component Frame
+            └── Element Frame
+</code></pre>
+<h3 id="frame-naming-convention">Frame Naming Convention</h3>
+<pre><code>[type]/[purpose]/[variant]
+
+Examples:
+section/hero/default
+component/card/primary
+element/input/active
+</code></pre>
+<h2 id="advanced-frame-configuration">Advanced Frame Configuration</h2>
+<h3 id="1-layout-frames">1. Layout Frames</h3>
+<h4 id="desktop-breakpoint-frame">Desktop Breakpoint Frame</h4>
+<ul>
+<li>Width: 1440px (default)</li>
+<li>Auto-layout: Vertical</li>
+<li>Padding: 64px horizontal, 40px vertical</li>
+<li>Gap: 80px between sections</li>
+<li>Alignment: Center children</li>
+<li>Properties:<pre><code>Constraints: Center
+Layout Mode: Vertical
+Layout Align: Center
+Clip Content: False
+</code></pre>
+</li>
+</ul>
+<h4 id="responsive-frame-settings">Responsive Frame Settings</h4>
+<pre><code>Desktop: 1440px
+Tablet: 768px
+Mobile: 375px
+
+Properties per breakpoint:
+- Padding scales: 64/32/16
+- Gap scales: 80/40/24
+- Margins scale: 40/24/16
+</code></pre>
+<h3 id="2-component-frames">2. Component Frames</h3>
+<h4 id="container-properties">Container Properties</h4>
+<pre><code>Default settings:
+- Auto-layout: Enabled
+- Padding: 24px
+- Gap: 16px
+- Radius: 8px
+- Stroke: 1px (if needed)
+- Background: System color
+</code></pre>
+<h4 id="interactive-states">Interactive States</h4>
+<pre><code>└── Component Frame
+    ├── Default
+    ├── Hover
+    ├── Active
+    └── Disabled
+</code></pre>
+<h3 id="3-element-frames">3. Element Frames</h3>
+<h4 id="atomic-element-structure">Atomic Element Structure</h4>
+<pre><code>└── Element Frame
+    ├── Icon
+    ├── Text
+    └── Interactive Area
+</code></pre>
+<h4 id="configuration-settings">Configuration Settings</h4>
+<pre><code>Properties:
+- Size: Fixed or Hug
+- Constraints: Scale
+- Layout: Based on content
+- Clipping: As needed
+</code></pre>
+<h2 id="groups-vs-frames-best-practices">Groups vs Frames Best Practices</h2>
+<h3 id="when-to-use-groups">When to Use Groups</h3>
+<ol>
+<li>
+<p><strong>Temporary Combinations</strong></p>
+<ul>
+<li>Quick iterations</li>
+<li>Exploration phases</li>
+<li>Non-reusable elements</li>
+</ul>
+</li>
+<li>
+<p><strong>Simple Layouts</strong></p>
+<ul>
+<li>Static elements</li>
+<li>Illustration parts</li>
+<li>Decorative elements</li>
+</ul>
+</li>
+<li>
+<p><strong>Performance Optimization</strong></p>
+<ul>
+<li>Lightweight grouping</li>
+<li>Simple transforms</li>
+<li>Basic selections</li>
+</ul>
+</li>
+</ol>
+<h3 id="when-to-use-frames">When to Use Frames</h3>
+<ol>
+<li>
+<p><strong>Complex Layouts</strong></p>
+<ul>
+<li>Auto-layout requirements</li>
+<li>Responsive behavior</li>
+<li>Nested components</li>
+</ul>
+</li>
+<li>
+<p><strong>Interactive Elements</strong></p>
+<ul>
+<li>Prototype connections</li>
+<li>State management</li>
+<li>User interactions</li>
+</ul>
+</li>
+<li>
+<p><strong>Component Architecture</strong></p>
+<ul>
+<li>Design systems</li>
+<li>Reusable patterns</li>
+<li>Variant management</li>
+</ul>
+</li>
+</ol>
+<h2 id="advanced-frame-techniques">Advanced Frame Techniques</h2>
+<h3 id="1-constraint-management">1. Constraint Management</h3>
+<pre><code>Parent Frame
+├── Fixed Position
+│   └── Pinned to edges
+├── Flexible Width
+│   └── Left &amp; Right: Scale
+└── Centered Content
+    └── Center constraints
+</code></pre>
+<h3 id="2-auto-layout-patterns">2. Auto-layout Patterns</h3>
+<h4 id="stack-patterns">Stack Patterns</h4>
+<pre><code>Vertical Stack
+├── Gap: 16px
+├── Padding: 24px
+└── Alignment: Center
+
+Horizontal Stack
+├── Gap: 8px
+├── Padding: 16px
+└── Alignment: Center
+</code></pre>
+<h4 id="grid-systems">Grid Systems</h4>
+<pre><code>Grid Frame
+├── Columns: 12
+├── Margin: 24px
+├── Gutter: 16px
+└── Alignment: Stretch
+</code></pre>
+<h3 id="3-frame-masking">3. Frame Masking</h3>
+<pre><code>Mask Frame
+├── Shape Layer
+├── Content Layer
+└── Mask Settings
+    ├── Clip content
+    └── Layer effects
+</code></pre>
+<h2 id="organization-strategies">Organization Strategies</h2>
+<h3 id="1-page-structure">1. Page Structure</h3>
+<pre><code>Project
+└── Pages
+    ├── 📱 Mobile
+    ├── 💻 Desktop
+    ├── 🎨 Design System
+    └── 🚧 WIP
+</code></pre>
+<h3 id="2-frame-management">2. Frame Management</h3>
+<pre><code>Page
+└── Sections
+    ├── Header
+    │   └── Components
+    ├── Main Content
+    │   └── Components
+    └── Footer
+        └── Components
+</code></pre>
+<h3 id="3-component-organization">3. Component Organization</h3>
+<pre><code>Design System
+└── Components
+    ├── Atomic
+    ├── Molecular
+    └── Organisms
+</code></pre>
+<h2 id="performance-optimization">Performance Optimization</h2>
+<h3 id="1-frame-efficiency">1. Frame Efficiency</h3>
+<ul>
+<li>Minimize nested frames</li>
+<li>Use groups for static content</li>
+<li>Optimize auto-layout usage</li>
+<li>Reduce unnecessary constraints</li>
+</ul>
+<h3 id="2-memory-management">2. Memory Management</h3>
+<ul>
+<li>Clean up unused frames</li>
+<li>Remove hidden layers</li>
+<li>Optimize large frames</li>
+<li>Use components efficiently</li>
+</ul>
+<h2 id="quality-assurance-checklist-1">Quality Assurance Checklist</h2>
+<h3 id="frame-structure">Frame Structure</h3>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Consistent naming convention</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Proper hierarchy</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Organized layers</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Clean constraints</li>
+</ul>
+<h3 id="layout-verification">Layout Verification</h3>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Auto-layout configuration</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Responsive behavior</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Proper spacing</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Alignment consistency</li>
+</ul>
+<h3 id="performance-checks">Performance Checks</h3>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Optimal nesting</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Efficient grouping</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Clean organization</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Memory optimization</li>
+</ul>
+<h2 id="common-pitfalls">Common Pitfalls</h2>
+<h3 id="1-structural-issues">1. Structural Issues</h3>
+<ul>
+<li>Excessive frame nesting</li>
+<li>Inconsistent naming</li>
+<li>Poor hierarchy</li>
+<li>Messy constraints</li>
+</ul>
+<h3 id="2-layout-problems">2. Layout Problems</h3>
+<ul>
+<li>Broken auto-layout</li>
+<li>Inconsistent spacing</li>
+<li>Poor responsive behavior</li>
+<li>Alignment issues</li>
+</ul>
+<h3 id="3-performance-issues">3. Performance Issues</h3>
+<ul>
+<li>Too many nested frames</li>
+<li>Unnecessary groups</li>
+<li>Unorganized structure</li>
+<li>Heavy frame usage</li>
+</ul>
+<h2 id="troubleshooting-guide">Troubleshooting Guide</h2>
+<h3 id="common-issues-resolution">Common Issues Resolution</h3>
+<ol>
+<li>
+<p><strong>Broken Layouts</strong></p>
+<ul>
+<li>Check auto-layout settings</li>
+<li>Verify constraints</li>
+<li>Review padding/margins</li>
+<li>Check alignment</li>
+</ul>
+</li>
+<li>
+<p><strong>Performance Problems</strong></p>
+<ul>
+<li>Reduce nesting</li>
+<li>Optimize groups</li>
+<li>Clean up unused frames</li>
+<li>Simplify complex structures</li>
+</ul>
+</li>
+<li>
+<p><strong>Organization Issues</strong></p>
+<ul>
+<li>Implement naming convention</li>
+<li>Reorganize hierarchy</li>
+<li>Clean up layers</li>
+<li>Document structure</li>
+</ul>
+</li>
+</ol>
+<h1 id="layout-grid-systems">Layout Grid Systems</h1>
+<h2 id="core-grid-architecture">Core Grid Architecture</h2>
+<h3 id="industry-standard-column-grids">Industry Standard Column Grids</h3>
+<ol>
+<li>
+<p><strong>Desktop Layouts (1440px)</strong></p>
+<pre><code>Standard 12-Column Grid
+├── Columns: 12
+├── Margin: 80px
+├── Gutter: 24px
+└── Column width: 88px (fluid)
+
+Alternate 16-Column Grid
+├── Columns: 16
+├── Margin: 64px
+├── Gutter: 16px
+└── Column width: 64px (fluid)
+</code></pre>
+</li>
+<li>
+<p><strong>Tablet Layouts (768px)</strong></p>
+<pre><code>Standard 8-Column Grid
+├── Columns: 8
+├── Margin: 32px
+├── Gutter: 16px
+└── Column width: 77px (fluid)
+</code></pre>
+</li>
+<li>
+<p><strong>Mobile Layouts (375px)</strong></p>
+<pre><code>Standard 4-Column Grid
+├── Columns: 4
+├── Margin: 16px
+├── Gutter: 16px
+└── Column width: 73.75px (fluid)
+</code></pre>
+</li>
+</ol>
+<h3 id="grid-calculation-formulas">Grid Calculation Formulas</h3>
+<pre><code>Available Width = Screen Width - (2 × Margin)
+Column Width = (Available Width - (Gutters × (Columns - 1))) ÷ Columns
+
+Example (1440px desktop):
+Available Width = 1440px - (2 × 80px) = 1280px
+Column Width = (1280px - (24px × 11)) ÷ 12 = 88px
+</code></pre>
+<h2 id="advanced-grid-configurations">Advanced Grid Configurations</h2>
+<h3 id="1-nested-grid-systems">1. Nested Grid Systems</h3>
+<pre><code>Parent Grid (12 columns)
+└── Nested Grid (6 columns)
+    └── Nested Grid (3 columns)
+
+Nesting Rules:
+- Maintain consistent ratios
+- Adjust gutters proportionally
+- Preserve margin relationships
+</code></pre>
+<h3 id="2-compound-grid-systems">2. Compound Grid Systems</h3>
+<pre><code>Layout Grid Stack
+├── Column Grid (Structure)
+├── Baseline Grid (Typography)
+└── Pixel Grid (Details)
+
+Properties:
+- Color coding for visibility
+- Selective visibility states
+- Grid-specific settings
+</code></pre>
+<h2 id="grid-standards-by-industry">Grid Standards by Industry</h2>
+<h3 id="1-enterprise-applications">1. Enterprise Applications</h3>
+<pre><code>Desktop (1440px)
+├── Columns: 12
+├── Margin: 64px
+├── Gutter: 24px
+└── Dense layout priority
+
+Characteristics:
+- Narrower margins
+- Consistent gutters
+- Information density
+</code></pre>
+<h3 id="2-marketing-websites">2. Marketing Websites</h3>
+<pre><code>Desktop (1440px)
+├── Columns: 12
+├── Margin: 80px-120px
+├── Gutter: 32px
+└── Breathing space priority
+
+Characteristics:
+- Wider margins
+- Larger gutters
+- Emphasis on whitespace
+</code></pre>
+<h3 id="3-e-commerce-platforms">3. E-commerce Platforms</h3>
+<pre><code>Desktop (1440px)
+├── Columns: 16
+├── Margin: 48px
+├── Gutter: 16px
+└── Product grid optimization
+
+Characteristics:
+- Product card alignment
+- Flexible item layouts
+- Category organization
+</code></pre>
+<h2 id="grid-component-relationships">Grid Component Relationships</h2>
+<h3 id="1-component-sizing-standards">1. Component Sizing Standards</h3>
+<pre><code>Button Widths:
+├── Small: 2 columns
+├── Medium: 3 columns
+└── Large: 4 columns
+
+Card Layouts:
+├── Small: 3 columns
+├── Medium: 4 columns
+└── Large: 6 columns
+</code></pre>
+<h3 id="2-spacing-system-integration">2. Spacing System Integration</h3>
+<pre><code>Margin Scale:
+├── 8px (atomic)
+├── 16px (component)
+├── 24px (section)
+└── 32px+ (layout)
+
+Grid Alignment:
+├── Component edges to grid lines
+├── Internal spacing to 8px system
+└── Gutters as spacing reference
+</code></pre>
+<h2 id="responsive-grid-behavior">Responsive Grid Behavior</h2>
+<h3 id="1-breakpoint-management">1. Breakpoint Management</h3>
+<pre><code>Major Breakpoints
+├── Desktop Large (1920px): 12-16 columns
+├── Desktop (1440px): 12 columns
+├── Tablet (768px): 8 columns
+└── Mobile (375px): 4 columns
+
+Minor Breakpoints
+├── Desktop Medium (1680px)
+├── Desktop Small (1280px)
+├── Tablet Portrait (834px)
+└── Mobile Large (428px)
+</code></pre>
+<h3 id="2-grid-transformation-rules">2. Grid Transformation Rules</h3>
+<pre><code>Column Adaptation
+├── Maintain column count until breakpoint
+├── Adjust margins proportionally
+├── Preserve gutter relationships
+└── Recalculate column widths
+
+Content Reflow
+├── Stack on smaller screens
+├── Maintain hierarchy
+├── Preserve readability
+└── Optimize touch targets
+</code></pre>
+<h2 id="grid-setup-best-practices">Grid Setup Best Practices</h2>
+<h3 id="1-initial-configuration">1. Initial Configuration</h3>
+<pre><code>Frame Setup
+├── Set width to breakpoint
+├── Enable layout grid
+├── Configure columns
+└── Set color and opacity
+
+Grid Properties
+├── Define count and width
+├── Set margins and gutters
+├── Configure alignment
+└── Save as grid style
+</code></pre>
+<h3 id="2-grid-style-management">2. Grid Style Management</h3>
+<pre><code>Grid Styles
+├── [breakpoint]/[columns]/[purpose]
+├── Desktop/12col/default
+├── Tablet/8col/dense
+└── Mobile/4col/default
+</code></pre>
+<h2 id="advanced-techniques">Advanced Techniques</h2>
+<h3 id="1-multi-column-layouts">1. Multi-Column Layouts</h3>
+<pre><code>Asymmetric Grids
+├── 5+7 split
+├── 4+4+4 split
+├── 8+4 split
+└── Custom ratios
+
+Dynamic Spans
+├── Content-based spanning
+├── Responsive adjustments
+└── Breakpoint adaptations
+</code></pre>
+<h3 id="2-grid-customization">2. Grid Customization</h3>
+<pre><code>Special Cases
+├── Full-bleed sections
+├── Edge-to-edge content
+├── Offset layouts
+└── Overlapping elements
+</code></pre>
+<h2 id="common-grid-values-reference">Common Grid Values Reference</h2>
+<h3 id="1-column-counts">1. Column Counts</h3>
+<pre><code>Standard Options:
+- 12 columns (most common)
+- 16 columns (dense layouts)
+- 8 columns (tablet)
+- 4 columns (mobile)
+</code></pre>
+<h3 id="2-margin-values">2. Margin Values</h3>
+<pre><code>Desktop:
+- Minimum: 48px
+- Standard: 80px
+- Generous: 120px
+
+Tablet:
+- Minimum: 24px
+- Standard: 32px
+- Generous: 48px
+
+Mobile:
+- Minimum: 12px
+- Standard: 16px
+- Generous: 24px
+</code></pre>
+<h3 id="3-gutter-values">3. Gutter Values</h3>
+<pre><code>Desktop:
+- Dense: 16px
+- Standard: 24px
+- Generous: 32px
+
+Tablet/Mobile:
+- Dense: 12px
+- Standard: 16px
+- Generous: 24px
+</code></pre>
+<h2 id="quality-assurance-checklist-2">Quality Assurance Checklist</h2>
+<h3 id="grid-setup">Grid Setup</h3>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Correct column count for breakpoint</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Appropriate margins for screen size</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Consistent gutter spacing</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Grid styles properly saved</li>
+</ul>
+<h3 id="responsive-behavior">Responsive Behavior</h3>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Graceful column adaptation</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Proper content reflow</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Maintained visual hierarchy</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Consistent spacing system</li>
+</ul>
+<h3 id="component-alignment">Component Alignment</h3>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Elements snap to grid</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Consistent spacing usage</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Proper nesting implementation</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Clear content hierarchy</li>
+</ul>
+<h2 id="common-pitfalls-1">Common Pitfalls</h2>
+<ol>
+<li>
+<p><strong>Setup Issues</strong></p>
+<ul>
+<li>Inconsistent margin values</li>
+<li>Improper gutter spacing</li>
+<li>Misaligned columns</li>
+<li>Poor grid style management</li>
+</ul>
+</li>
+<li>
+<p><strong>Responsive Problems</strong></p>
+<ul>
+<li>Broken layouts at breakpoints</li>
+<li>Inconsistent column adaptation</li>
+<li>Poor content reflow</li>
+<li>Spacing inconsistencies</li>
+</ul>
+</li>
+<li>
+<p><strong>Implementation Challenges</strong></p>
+<ul>
+<li>Over-reliance on grid exceptions</li>
+<li>Inconsistent component sizing</li>
+<li>Poor nested grid implementation</li>
+<li>Unclear grid hierarchy</li>
+</ul>
+</li>
+</ol>
+
+            
+            
+        </body>
+        </html>
