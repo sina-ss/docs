@@ -1245,3 +1245,907 @@ Tablet/Mobile:
    - Poor nested grid implementation
    - Unclear grid hierarchy
 
+# Advanced Grid Patterns and Special Use Cases
+
+## Editorial Grid Systems
+
+Editorial layouts require sophisticated grid systems that can handle complex content hierarchies while maintaining readability and visual interest.
+
+### Magazine-Style Layouts
+```
+Master Grid (12 columns)
+├── Primary Content (8 columns)
+│   ├── Feature Text (6 columns)
+│   └── Pull Quotes (2-3 columns)
+└── Secondary Content (4 columns)
+    ├── Sidebars (4 columns)
+    └── Callouts (2 columns)
+
+Characteristics:
+- Dynamic column spans
+- Varied content widths
+- Hierarchical spacing
+- Asymmetric balance
+```
+
+### Article Grid Pattern
+```
+Content Grid Structure
+├── Headlines (8-12 columns)
+├── Lead Paragraph (6-8 columns)
+├── Body Text (6 columns)
+└── Supporting Elements
+    ├── Images (4-12 columns)
+    ├── Captions (2-4 columns)
+    └── Footnotes (4-6 columns)
+```
+
+## Dashboard Grid Patterns
+
+Modern dashboard designs require flexible grid systems that can accommodate various data visualization components while maintaining clarity and usability.
+
+### Analytics Dashboard Pattern
+```
+Dashboard Grid (16 columns)
+├── Key Metrics Row (16 columns)
+│   └── Metric Cards (4 columns each)
+├── Primary Charts (8-16 columns)
+│   ├── Full-width Charts (16 columns)
+│   └── Split Charts (8 columns each)
+└── Secondary Data (4-8 columns)
+    ├── Small Charts (4 columns)
+    └── Data Tables (8 columns)
+
+Spacing Rules:
+- 24px between cards
+- 32px between sections
+- 16px internal padding
+```
+
+### Data-Dense Layouts
+```
+Dense Grid System (16 columns)
+├── Header (16 columns)
+├── Filters Bar (16 columns)
+└── Content Area
+    ├── Dense Cards (4 columns)
+    ├── Tables (12-16 columns)
+    └── Mini Charts (2-4 columns)
+```
+
+## E-commerce Grid Patterns
+
+E-commerce layouts need to balance product presentation with user experience, requiring specialized grid patterns for different page types.
+
+### Product Listing Pattern
+```
+Category Page Grid (12 columns)
+├── Filters (3 columns)
+└── Product Grid (9 columns)
+    └── Product Cards
+        ├── 3 cards per row (desktop)
+        ├── 2 cards per row (tablet)
+        └── 1 card per row (mobile)
+
+Card Spacing:
+- 24px horizontal gap
+- 32px vertical gap
+- 16px internal padding
+```
+
+### Product Detail Pattern
+```
+Product Page Grid (12 columns)
+├── Image Gallery (7 columns)
+│   ├── Main Image (7 columns)
+│   └── Thumbnails (1-2 columns each)
+└── Product Info (5 columns)
+    ├── Title & Price
+    ├── Options
+    └── Description
+```
+
+## Application Interface Patterns
+
+Complex applications require sophisticated grid systems that can handle multiple levels of information and interaction.
+
+### Multi-Panel Application
+```
+App Layout Grid (16 columns)
+├── Navigation (2 columns)
+├── List Panel (4 columns)
+├── Content Panel (6 columns)
+└── Details Panel (4 columns)
+
+Panel Behavior:
+- Collapsible panels
+- Fluid width adjustment
+- Maintained proportions
+```
+
+### Workspace Pattern
+```
+Workspace Grid (12 columns)
+├── Toolbar (12 columns)
+├── Canvas Area (9 columns)
+└── Properties Panel (3 columns)
+    └── Nested 4-column grid
+```
+
+## Special Grid Patterns
+
+These patterns address specific design challenges that require unique grid solutions.
+
+### Offset Grid Pattern
+```
+Offset Layout (12 columns)
+├── Section 1
+│   └── Content offset by 2 columns
+├── Section 2
+│   └── Content offset by -2 columns
+└── Section 3
+    └── Alternating offsets
+
+Usage:
+- Creative layouts
+- Portfolio sites
+- Brand storytelling
+```
+
+### Modular Grid Pattern
+```
+Module-Based Grid
+├── Base Module (2 columns)
+└── Compound Modules
+    ├── 2×2 (4 columns)
+    ├── 3×2 (6 columns)
+    └── 4×2 (8 columns)
+
+Applications:
+- Image galleries
+- Card-based layouts
+- Portfolio grids
+```
+
+### Hybrid Grid Pattern
+```
+Combined Grid System
+├── Column Grid (12 columns)
+├── Modular Grid (6×6 modules)
+└── Baseline Grid (8px)
+
+Benefits:
+- Layout flexibility
+- Consistent proportions
+- Varied content support
+```
+
+## Advanced Implementation Techniques
+
+### Progressive Grid Enhancement
+```
+Base Grid Structure
+└── Enhancement Layers
+    ├── Modular Additions
+    ├── Offset Elements
+    └── Nested Systems
+
+Implementation:
+- Start with standard grid
+- Add complexity progressively
+- Maintain consistent ratios
+```
+
+### Content-Aware Grid Adaptation
+```
+Dynamic Grid System
+├── Content Analysis
+│   ├── Text length
+│   ├── Image ratios
+│   └── Component density
+└── Grid Adjustment
+    ├── Column span adaptation
+    ├── Gutter modification
+    └── Margin adjustment
+```
+
+### Performance Optimization
+```
+Grid Performance Rules
+├── Minimize grid styles
+├── Use consistent breakpoints
+├── Optimize reflow behavior
+└── Cache grid calculations
+
+Best Practices:
+- Reuse grid styles
+- Limit nested grids
+- Optimize calculations
+```
+
+## Grid Testing Framework
+
+### Responsive Testing Matrix
+```
+Test Scenarios
+├── Breakpoint Transitions
+├── Content Stress Tests
+├── Component Behavior
+└── Layout Integrity
+
+Validation Points:
+- Grid consistency
+- Content alignment
+- Spacing accuracy
+- Responsive behavior
+```
+
+### Accessibility Considerations
+```
+Grid Accessibility Checks
+├── Text Column Width
+│   └── Maximum 70-80 characters
+├── Touch Targets
+│   └── Minimum 44×44px
+└── Content Reflow
+    └── 400% zoom support
+```
+
+# Advanced Typography Systems
+
+## Type Scale Foundation
+
+### Base Font Size System
+```
+Base size: 16px (1rem)
+Scale ratio: 1.250 (Major Third)
+
+Display: 3.052rem (48.83px)
+H1: 2.441rem (39.06px)
+H2: 1.953rem (31.25px)
+H3: 1.563rem (25.00px)
+H4: 1.25rem (20.00px)
+Body: 1rem (16.00px)
+Small: 0.8rem (12.80px)
+XSmall: 0.64rem (10.24px)
+```
+
+### Font Size Usage Guidelines
+
+The selection of font sizes should be deliberate and purpose-driven. Here's when to use each size:
+
+**Display (48.83px)**
+- Hero sections
+- Landing page headlines
+- Major section dividers
+- Brand statements
+- When the text needs to command immediate attention
+
+**H1 (39.06px)**
+- Page titles
+- Article headlines
+- Primary section headers
+- Feature introductions
+- Product names in hero sections
+
+**H2 (31.25px)**
+- Major section headings
+- Blog post titles
+- Product category headers
+- Feature highlights
+- Secondary content divisions
+
+**H3 (25.00px)**
+- Subsection headers
+- Card titles
+- Modal headers
+- Form section dividers
+- Featured content titles
+
+**H4 (20.00px)**
+- Widget headers
+- List group titles
+- Minor section headers
+- Navigation group labels
+- Dashboard card headers
+
+**Body (16.00px)**
+- Main content text
+- Descriptions
+- Form input text
+- Navigation items
+- Button labels
+
+**Small (12.80px)**
+- Helper text
+- Meta information
+- Copyright notices
+- Form field hints
+- Secondary navigation
+
+**XSmall (10.24px)**
+- Legal text
+- Footnotes
+- Version numbers
+- Timestamps
+- Credit lines
+
+## Line Height Systems
+
+### Standard Line Height Ratios
+
+```
+Tight (1.25)
+- Used for: Headlines, buttons, compact UI elements
+- Example: 16px font → 20px line height
+
+Normal (1.5)
+- Used for: Body text, descriptions, general content
+- Example: 16px font → 24px line height
+
+Loose (1.75)
+- Used for: Long-form content, improved readability
+- Example: 16px font → 28px line height
+
+Custom Ratios:
+Display: 1.1
+H1-H2: 1.2
+H3-H4: 1.3
+Body: 1.5
+Small: 1.4
+```
+
+### Line Height Usage Guidelines
+
+**Tight (1.25)**
+- Headlines and display text
+- Navigation items
+- Buttons and calls to action
+- Data tables
+- Compact UI components
+- Lists in limited space
+
+**Normal (1.5)**
+- Body text
+- Product descriptions
+- Feature explanations
+- Blog post content
+- Form labels
+- Card content
+
+**Loose (1.75)**
+- Long-form articles
+- Educational content
+- Documentation
+- Terms and conditions
+- Privacy policies
+
+## Font Weight System
+
+### Weight Scale
+```
+Thin: 100
+Extra Light: 200
+Light: 300
+Regular: 400
+Medium: 500
+Semi Bold: 600
+Bold: 700
+Extra Bold: 800
+Black: 900
+```
+
+### Weight Usage Guidelines
+
+**Light (300)**
+- Large display text
+- Decorative elements
+- Subtle emphasis
+- Secondary information
+- Background text elements
+
+**Regular (400)**
+- Body text
+- General content
+- Form inputs
+- Navigation items
+- Descriptions
+
+**Medium (500)**
+- Subheadings
+- Important UI elements
+- Active states
+- Selected items
+- Emphasis text
+
+**Semi Bold (600)**
+- Section headers
+- Navigation headers
+- Important buttons
+- Featured content
+- Primary actions
+
+**Bold (700)**
+- Main headlines
+- Critical information
+- Strong emphasis
+- Call-to-action buttons
+- Primary navigation
+
+**Extra Bold (800)**
+- Hero headlines
+- Brand elements
+- Extreme emphasis
+- Marketing messages
+- Feature highlights
+
+### Paragraph Spacing
+```
+Paragraph Spacing:
+- 16px between paragraphs
+- 8px between lists
+- 4px between list items
+```
+
+common spacing value is half of the font size.
+
+## Component Creation Best Practices
+
+### Text Style Component Structure
+```
+└── Typography
+    ├── Display
+    │   ├── Regular
+    │   └── Bold
+    ├── Heading
+    │   ├── H1
+    │   ├── H2
+    │   ├── H3
+    │   └── H4
+    ├── Body
+    │   ├── Regular
+    │   ├── Medium
+    │   └── Bold
+    └── UI
+        ├── Button
+        ├── Caption
+        └── Label
+```
+
+### Component Naming Convention
+```
+[category]/[variant]/[weight]-[size]
+
+Examples:
+heading/display/bold-48
+body/paragraph/regular-16
+ui/button/medium-14
+```
+
+### Implementation Guidelines
+
+1. **Create Base Text Styles**
+```
+Base Text Properties:
+- Font family
+- Font size
+- Line height
+- Letter spacing
+- Paragraph spacing
+- Text case
+- Text decoration
+- OpenType features
+```
+
+2. **Build Component Variants**
+```
+Text Component Structure:
+├── Default state
+├── Hover state
+├── Active state
+└── Disabled state
+
+Properties to Consider:
+- Color variations
+- Weight changes
+- Spacing adjustments
+- Alignment options
+```
+
+3. **Document Usage Parameters**
+```
+Style Documentation:
+├── Purpose
+├── Use cases
+├── Restrictions
+└── Examples
+```
+
+## Advanced Typography Components
+
+### 1. Rich Text Component
+```
+Rich Text Structure
+├── Heading styles
+├── Paragraph styles
+├── List styles
+└── Inline styles
+    ├── Bold
+    ├── Italic
+    ├── Link
+    └── Code
+```
+
+### 2. Dynamic Text Components
+```
+Variable Text Component
+├── Auto-sizing rules
+├── Truncation behavior
+├── Overflow handling
+└── Responsive scaling
+```
+
+### 3. Multi-Language Support
+```
+Language Variants
+├── Latin scripts
+├── CJK characters
+├── RTL support
+└── Special characters
+```
+
+## Typography System Management
+
+### 1. Style Organization
+```
+Style Library
+├── Global styles
+├── Project-specific styles
+└── Override styles
+```
+
+### 2. Version Control
+```
+Version Tracking
+├── Style versions
+├── Change documentation
+└── Deprecation notes
+```
+
+### 3. Performance Optimization
+```
+Optimization Rules
+├── Minimize style variations
+├── Reuse common styles
+└── Clean unused styles
+```
+
+## Quality Assurance Checklist
+
+### Typography Setup
+- [ ] Complete type scale implementation
+- [ ] Consistent line heights
+- [ ] Appropriate font weights
+- [ ] OpenType features configured
+
+### Component Structure
+- [ ] Proper style organization
+- [ ] Clear naming convention
+- [ ] Component variants defined
+- [ ] Usage documentation
+
+### Responsive Behavior
+- [ ] Fluid typography scales
+- [ ] Breakpoint adjustments
+- [ ] Mobile optimization
+- [ ] Text wrapping rules
+
+## Common Pitfalls to Avoid
+
+1. **System Issues**
+- Inconsistent scale implementation
+- Mixed line height ratios
+- Conflicting weight usage
+- Poor component organization
+
+2. **Performance Problems**
+- Too many custom styles
+- Unused text styles
+- Excessive variants
+- Complex inheritance
+
+3. **Maintenance Challenges**
+- Unclear naming systems
+- Missing documentation
+- Inconsistent updates
+- Poor version control
+
+
+# Drawing Techniques
+
+## Drawing Fundamentals and Best Practices
+
+### Vector Drawing Principles
+When working with vectors in Figma, it's essential to understand that shapes are mathematically defined paths rather than pixels. This means they can be scaled infinitely without losing quality. The key to efficient vector drawing is minimizing anchor points while maintaining smooth curves.
+
+```
+Good Practice:
+- Minimal anchor points
+- Smooth curve transitions
+- Proper handle alignment
+- Strategic point placement
+
+Bad Practice:
+- Excessive anchor points
+- Abrupt direction changes
+- Misaligned handles
+- Random point placement
+```
+
+## Advanced Corner Techniques
+
+### Understanding Corner Types
+
+#### Regular Rounded Corners
+Regular rounded corners create a perfect circular arc at each corner. They're useful for basic UI elements but can feel mechanical in more sophisticated designs.
+
+```
+Properties:
+- Uniform radius
+- Circular arc
+- Consistent curvature
+- Single radius value
+```
+
+#### Squircle (Super-Ellipse)
+A squircle creates a more natural and pleasing corner transition than a standard rounded corner. It's particularly popular in modern UI design and is used extensively in iOS interfaces.
+
+```
+Characteristics:
+- Continuous curvature
+- Natural transition
+- Organic feel
+- Variable radius
+
+Implementation:
+1. Create rectangle
+2. Enable corner smoothing
+3. Adjust corner radius
+4. Fine-tune smoothing
+```
+
+### Corner Smoothing Techniques
+
+```
+Smoothing Levels:
+0% - Sharp corners (standard rounded)
+25% - Slight smoothing
+50% - Balanced smoothing (most common)
+75% - Heavy smoothing
+100% - Maximum smoothing (pure squircle)
+```
+
+## Boolean Operations Deep Dive
+
+### Union vs. Flatten
+Understanding the difference between Union and Flatten is crucial for efficient vector work.
+
+**Union**
+- Combines shapes while maintaining editability
+- Preserves original shapes as components
+- Allows for future modifications
+- Maintains separate fill/stroke properties
+- Higher file size due to preserved data
+
+**Flatten**
+- Merges shapes permanently
+- Creates a single vector path
+- Reduces file size
+- Removes editing history
+- Better performance for complex shapes
+
+### Boolean Operations Guide
+
+#### Union (Add)
+```
+Use Cases:
+- Combining shapes that need future editing
+- Creating complex icons
+- Building component variants
+- Maintaining shape hierarchy
+```
+
+#### Subtract
+```
+Use Cases:
+- Creating cutouts
+- Making negative space
+- Designing icons with holes
+- Crafting masks
+```
+
+#### Intersect
+```
+Use Cases:
+- Finding common areas
+- Creating overlapping effects
+- Making complex masks
+- Generating precise shapes
+```
+
+#### Exclude
+```
+Use Cases:
+- Creating rings
+- Making toggles
+- Designing complex patterns
+- Building negative space designs
+```
+
+### Best Practices for Boolean Operations
+
+```
+Workflow Tips:
+1. Plan operation order
+2. Group related operations
+3. Name layers meaningfully
+4. Use components for repetition
+5. Consider performance impact
+```
+
+## Smart Selection and Alignment
+
+### Smart Selection Features
+
+```
+Selection Methods:
+- Click-drag for area selection
+- Shift-click for multiple selection
+- Alt-click for deep selection
+- Command/Ctrl-click for direct selection
+```
+
+### Tidy Up Functionality
+
+The Tidy Up feature in Figma helps maintain precise alignment and spacing. Here's how to use it effectively:
+
+```
+Tidy Up Options:
+1. Horizontal Spacing
+   - Distribute equally
+   - Match specific spacing
+   - Align to grid
+
+2. Vertical Spacing
+   - Distribute equally
+   - Match specific spacing
+   - Align to grid
+
+3. Both Axes
+   - Perfect grid alignment
+   - Maintain proportions
+   - Respect constraints
+```
+
+## Advanced Drawing Techniques
+
+### Pen Tool Mastery
+
+```
+Key Techniques:
+1. Curve Creation
+   - Click-drag for handles
+   - Alt-drag for independent handles
+   - Shift-click for 45° angles
+
+2. Point Editing
+   - Command/Ctrl-click to add points
+   - Alt-click to delete points
+   - Shift-C to toggle corner points
+```
+
+### Path Optimization
+
+```
+Optimization Steps:
+1. Reduce anchor points
+2. Smooth curves
+3. Align handles
+4. Remove redundant points
+5. Check path direction
+```
+
+## Drawing Tool Shortcuts and Tips
+
+### Essential Shortcuts
+```
+Drawing Tools:
+R - Rectangle
+O - Oval
+L - Line
+P - Pen tool
+Shift-P - Pencil tool
+
+Modifications:
+Command/Ctrl-E - Union
+Command/Ctrl-Shift-E - Subtract
+Command/Ctrl-Option-E - Intersect
+Command/Ctrl-Alt-X - Exclude
+```
+
+### Advanced Vector Techniques
+
+```
+Vector Manipulation:
+1. Point Reduction
+   - Select path
+   - Simplify curves
+   - Optimize anchor points
+
+2. Handle Alignment
+   - Select anchor point
+   - Align handles
+   - Smooth transitions
+```
+
+## Best Practices for Complex Illustrations
+
+### Layer Organization
+```
+Structure:
+└── Illustration
+    ├── Background
+    │   └── Base shapes
+    ├── Main Elements
+    │   ├── Primary shapes
+    │   └── Details
+    └── Highlights
+        └── Finishing touches
+```
+
+### Performance Optimization
+
+```
+Optimization Guidelines:
+1. Minimize boolean operations
+2. Use components for repeating elements
+3. Flatten when editing is complete
+4. Group related shapes
+5. Name layers systematically
+```
+
+## Quality Assurance Checklist
+
+### Vector Quality
+- [ ] Minimal anchor points
+- [ ] Smooth curves
+- [ ] Proper boolean operations
+- [ ] Optimized paths
+- [ ] Consistent corner treatment
+
+### Organization
+- [ ] Logical layer structure
+- [ ] Clear naming convention
+- [ ] Appropriate grouping
+- [ ] Component usage
+- [ ] Performance optimization
+
+## Common Pitfalls to Avoid
+
+1. **Vector Drawing Issues**
+- Excessive anchor points
+- Poor curve quality
+- Unoptimized paths
+- Inconsistent corner treatment
+
+2. **Boolean Operation Problems**
+- Complex boolean stacks
+- Unnecessary operations
+- Poor operation order
+- Unflattened final artwork
+
+3. **Organization Challenges**
+- Messy layer structure
+- Unclear naming
+- Poor grouping
+- Performance issues 
